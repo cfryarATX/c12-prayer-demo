@@ -13,11 +13,12 @@
   #gate button { width: 100%; min-height: 52px; margin-top: 12px; border: 0; border-radius: 12px; background: #d7b883; color: #10262f; font-size: 17px; font-weight: 700; }
   #gate .err { color: #ffb4a8; min-height: 22px; margin-top: 10px; font-size: 15px; }
   html.unlocked #gate { display: none; }
+  .demo-bar #demo-logout { background: #10262f; color: #fff8ec; border-color: #10262f; }
 </style>
 <script>
   (function () {
     var KEY = 'c12-prayer-demo-unlock';
-    try { if (localStorage.getItem(KEY) === '59e5aa65a9aab3ca04d1a6c30ea9bd231dd1625a11cf49131af25b18485a3c0e') document.documentElement.className += ' unlocked'; } catch (e) {}
+    try { if (localStorage.getItem(KEY) === 'e48cfcd4add9b767c8675d7a7ffaddcb53364d21dfedb8c66fe2536a40640031') document.documentElement.className += ' unlocked'; } catch (e) {}
   })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1208,8 +1209,21 @@ function esc_(s) {
   </div>
   <script>
     (function () {
-      var KEY = 'c12-prayer-demo-unlock', SALT = '01c946d20e1df1d6133edee5adbb16f1', HASH = '59e5aa65a9aab3ca04d1a6c30ea9bd231dd1625a11cf49131af25b18485a3c0e';
+      var KEY = 'c12-prayer-demo-unlock', SALT = '38a8f1fbfb5ff0720f57d578f0702ff3', HASH = 'e48cfcd4add9b767c8675d7a7ffaddcb53364d21dfedb8c66fe2536a40640031';
       function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+      // Log out: forget the unlock on this device and show the passcode screen again.
+      // The demo's sample data and the chosen persona are kept.
+      // The demo bar comes after this script, so listen on the document.
+      document.addEventListener('click', function (ev) {
+        if (!ev.target.closest || !ev.target.closest('#demo-logout')) return;
+        try { localStorage.removeItem(KEY); } catch (e) {}
+        try { sessionStorage.clear(); } catch (e) {}
+        document.documentElement.classList.remove('unlocked');
+        document.getElementById('gate-code').value = '';
+        document.getElementById('gate-err').textContent = '';
+        window.scrollTo(0, 0);
+        document.getElementById('gate-code').focus();
+      });
       document.getElementById('gate-form').addEventListener('submit', function (ev) {
         ev.preventDefault();
         var err = document.getElementById('gate-err');
@@ -1230,6 +1244,7 @@ function esc_(s) {
     <b>Demo with sample data</b>
     <label>Viewing as <select id="demo-persona" aria-label="Demo: viewing as"></select></label>
     <button type="button" id="demo-reset">Reset demo</button>
+    <button type="button" id="demo-logout">Log out</button>
   </div>
   <script>
     (function () {
