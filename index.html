@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  #gate { position: fixed; inset: 0; z-index: 1000; background: #152d38; color: #fff; display: flex; align-items: center; justify-content: center; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+  #gate .box { width: 100%; max-width: 360px; text-align: center; }
+  #gate img { width: 96px; height: 96px; border-radius: 22px; }
+  #gate h1 { font-size: 20px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin: 18px 0 4px; }
+  #gate p { color: #a9bcc5; margin: 0 0 18px; font-size: 15px; }
+  #gate input { width: 100%; min-height: 52px; border-radius: 12px; border: 1px solid rgba(255,255,255,.15); background: #1e3c49; color: #fff; font-size: 18px; padding: 0 14px; text-align: center; outline: 0; }
+  #gate input:focus { border-color: #d7b883; }
+  #gate button { width: 100%; min-height: 52px; margin-top: 12px; border: 0; border-radius: 12px; background: #d7b883; color: #10262f; font-size: 17px; font-weight: 700; }
+  #gate .err { color: #ffb4a8; min-height: 22px; margin-top: 10px; font-size: 15px; }
+  html.unlocked #gate { display: none; }
+</style>
+<script>
+  (function () {
+    var KEY = 'c12-prayer-demo-unlock';
+    try { if (localStorage.getItem(KEY) === '746ccf16c9c99dc39916db45bfff9a5a9ad195a63fc4c1916680f952455d4cd3') document.documentElement.className += ' unlocked'; } catch (e) {}
+  })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="C12 Prayer">
+<meta name="theme-color" content="#152d38">
+<title>C12 Prayer (Demo)</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAmQklEQVR42u2deXhV1dX/19r7DHe+mYAAKgqCzCqo1Iq+ttpqFRWV6lt/+jprW7WjYlvHtw61Tq/WWlt9RTrYt9W2OIGCA1SZw0wIhClMMmS887ln2Hv9/jhJvEkw9wqEJHjWE59Hk3hz7zmfs9Z3rb322khE4Jln+zPmXQLPPDg88+DwzIPDMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMg8MzDw7PPDg888yDwzMPDs88ODzz4PDMg8MzDw7PPDg88+DwzIPDsy+NKd4l6MyICAgBAbH1G1ZyX7a20swk+46dDASA4P5z5Bl68zk+BwpCxNa7Lh3LTuzMNtQY9ZvsdK1P40GfZhaPLx56DpFEZJ7n+PIYIiIAOEbMiW9P120xG2s0NHRNUWzHIcpkHcsizViUigwI9RtxpPLhwdHeZwjHcTL1ZmNNtnGLHd8V1IADMGmnLJHOOgAEgAhkOw5nPLlxph7qowbLoCXAeGGl15skklIiIme5TzwBgJ1N1Vf8IeqTGcM2LduRrichoP28SMivO1px+Wm3AONHHhxfomyFiISUQkoAYIgK55yxts8GEpHqC0dPmJRIZU1bOEQIhLAfMtwXSWdtv4zXrpkBgEB0hD1pR77nkFK6nzDXSazbuu1f8+YbWfPR79/oXgFsyUeACBDjNQto98eJtAmQ9/pgNOyj8olFx008wsSHcqQ6CUlERAwZa2EiZWTnr1rz1ieLV2zYsHrTVskUQAwH/D+/7ipHCIXzVjEKQNHjztgX3xll22LJLHbKBxEkMxbfNleNDAiWDnbZ8jxHz2XiszsNULN779zlq+YuWzl/TeXuukbgHKQEKRTGAcAB+Oej900683QhZatrISJEIGHvq5im2A1pw87DB4CmMFKDfcffoARKjhhx2uvhcAO9JMkYYy2PrO04y9ZvXFG96d2FSxetqUrZFhCAlAjEkUkSBEhEjCEglhYVzXn2sZHHDcrlw73B2cS+xuXTQFq2lNjpdZKA0aBmqX3Lxl/HOffg6G4mAIgoV0mkMsay9dUfVKyYtXDpuq3bgHMgAClcN0IILfLjM+OIgvHxw4bMe+EpRVEwR3y4AiK1e01289tZy5GS8ukPjAR1J3JC2ZjLjgzx0cvgcANHO3W5edfuZVXVMxcuXrRm/c76ekAEKUFKhXEiKd0ieCeyi3GHsSlnnf7qQ/cIKRliOz4aN32k1C9tyic+AACRhQOaGHhu6bGnAkno5Xz0DjjcjAMRWwOHI8SGbTtnL6mYuWDxksoNjhvlheRAiEySkF/kY7l8PHPHzd+bckkbcQpEBIhYt/IvqrEznjLzilNF4YyxkvE36JEBvd1/9Fw43MAhpeSMtT7KsWSqoqr67fmLPlldWV2zXTAOJEEIjvh5gaOgq4DIEBlX3nvm0YknjWkrPgAAhJ2pW/K/TMQzptP53ZYAAU21eaB8wq1cDVBukuzB0RUZx469tR9UrHj7kwVLKzfUJ1LAOUgBUrpM5A0chRhDkMiO6ddvwYvP9C0pklKyz5IXicjM+O6G5S8TkGOLzm+3BCwK6pbvqD7jrm5ZskUPjoMJHCSpTT07a1nrtm5/Z/7iectXrdtaE8+arrpEAI5MgiA6xG/eFadnjhk585lHFc5zxYdbvUjsqLC3z8lkHSKZ5+MAFoV0p/SUshO+0XvFRzfD0VrMbr0NjYnk/NWVHyxdPnf5yi07PhVcAZIgJW9x2l36hl3x8YPLJz3xg++2FR9AJBB5/fqZamxNLGnmE6eIiKGAqg6eFOo/tpdWProBjv1mHNXbdy5cs27+6sr3ly7bF0sAMjdwFJhxHGI+EH8/9Y7rJ53fjg8gIpD7lk7zOXWxtMU65UMSaKrCFT089upA0YDeyMfhg0NKIqDcjIOIlq/fuLBy/dsfL1i0tsqm5t9rzji6IHAUdEUAkWNA97/7zCOnjRohhOA5yQsAOkasfvkrYCdN28FO77cECOoqqdGyU29iqs+DI3/Gsa8xtnzDxrnLVs5esqx6+05wA0dLxnE4nUTn4nRgWVnFK8+XFkUkEWsrPjINNal1/2fbwnGczsUpAUZDuukb1G/cVUQyt+PwywuHKzBzffLW3XsWrl43Y978+avXxtIGMOaucfQcJjoGl2+eevKMXz+IjHWsjDVtnc/3zY8ls4Us20ZCOpVPLB58Zu+qfHSt50hns5t2fPrO/EUfVqxcvXFL2rYBAKRgSAy4bNajPdQUxh3Gb7v0gqd/9L0O4lQisoa1/1JTG5sSWcTOK2PIFaZy9A//dqR8eC9atu0qOFZWb/rDm7PmLV9Zs2sPKOrhzDgOJR9ccUj+/aF7Jp89sV1ljEiSFPXLpit2XTJj5V221TUVVX/RidfqoV7TU9hVLu6Vd2a/8t5HNZ/uBQBFSi4lAggi0avapYQUCHDLr57ZsG0nZ0y2feeMq9FRl1mgayrPk9cCZC1HJbNx7T9I2NBLrkBXwRHw6YqUKueI6EghemcLHREhyXgmc/3Dj8fTGQCQLYEQkQGRHioNDDlf5Yzl6yFlQMm0GcJYw/qZgCxvGe1IhkNKcqRwqYDebJJAAVixqebWR59miJQbExGJZKT/KGXgWWG/ml+XIjQlsyy2Lr5tAfYGPrztkPnNkUKRcsYni379p//rEFyQSEYHT7SDg6MhPS8fJMmwhLFtbqZxe8/nw4OjMPFBkpO8/6U/f1ixgjMmPgsublUPS0dfkpXBgK7KTpUpIjiOICmT6/8ljCY3Nnlw9G4jIiLJkP7rwcc27fyUMyZzsnAiyRRfdOwVAlVNVTvPzxHAcqQORmPV20I4gNBj+fDg+ALiAyXVJ9PXPPCYaVm5VQA3QPgj5aGh3/KpjPE8VxWB4ilTt3bHNs0BQAIPjiMhuJBCtHJLze1PPMcY5pbwEBmQDPUfK0vHF4V0ylfGQIR4ymT1q5Kfruqx4sOD40DE6Z9mfzT9ndkK521LvAhEZSPOz6oDokFN5uNDSpkxnfTGWWZ8d8/kw4PjQMQpI/mjZ343f3VlrjhtKYpT0ciLM1L3a1zmcx6OcBiKxrWv22YaEXua+PDgOBBxCiQN07rul4/XNcUYoszhg4i0QFHR6CsIUFV457cbATOW8GMmVvWGW0PrUWUhD44DFKecaGdd/Xfue6Sl2tFGnAaKj/Yf9w2/xhljeSunibSpGTsaqj9wd2J6cBwZ4hQ+Wbv+nhde7ihOiWR00ARRclI0pBVwtymRtrBuaWrPWkTWc/jw4DhYcfrU32ZMe+tdhXNHiNx4QSTLhp9v8D7hoCYpnzgFadoitWlmNlnrVl09OI4EccqJpj7/UuWWmjbJC7q1U1465nKbdJ/G8izbEli2UFE0rZtBwuohW108OA5WnBKJZMa49O4HapvibcQpIJBU/MWR4ZO5oihcySdOKWnYPtFQV/kmQI8QHx4ch0ac7qhrvP2JZxFR5jYnuJXTsiHKwDPDARUZ5rsZlExbenpzrGZ+TwguHhyHRpxy4by5YOnD0/7SrjLmVk6LB59pBYdGg3reyhgRJA3b3D43XbsRkZEUHhy9338AcCkenf7XmfMXt6+cIgOg0lEXpSES9CnU6TVHJCGEJEpsfMs2Ysh4N8YXD45DJj4kSUl0/cNPbti2o8OyLSHXysZMERJVhXWeuyCAZUuVzIY1/yBheXAcGXwAI4qnMzc+8mQslc7tGXOrF1q4X2DYxZwBQ9b5yhwCpQ07RA0N62cBdNuyiwfHIRYfCtCyjVt/+NRz7rJLTjkcgWRkwBhtwFeKQr68L4VAjcksNlU11SzsrspYz4UDW4oFmLvbvYv/1sG/lCOlIuXfPvzkyT//vYP4QAAqHnZuRj+mIHEqZdZ27J3zUg3b3SXfLzsciMg5d1s1bcdxHGE7whGi9fudX1GGyDlnOdbJLW/95ea/1fxXWLvJLV/cf0hG4p4X/zh32aq2fCAREEHZ6MkWhoK6kn/Z1nFIOPF1/5R2Bg77si3rSViAwrntOEY8YSSTmqoMKCvpWxLtX1pUHAqapmXEE0YqRW235zfzxJi7Iy1rmkY8nk2ns+mM++U4Yr+ugjOWNU0jnsimM6qi9C8rKYtGbdsx4kkjlQIAdqCIEBEQIdCNjzz5aW19bk+ySypX/UWjp0hihSzbGrYMcLN+7b9alMfh46OnDKlljAkhzES8/8D+51044ZxTxw07+qiyoqgkQgTTsnbXNqys3jR35Zq5y5Yb6bQvGKSWcpMQwjRNcIQvHBozdMg3Jpw68cRRwUDAcURA1x6e9uePFi/TA/7W9IExlJKMZGrk0OOvPP/rE0aNiIZCfYqLLMfeV9+4fuuOd5csfXfBIsuy/D7fge3YlAQc6NOGput/+cTs3z7WnLAgtvBBWqR/cNiF1taZadE8GLGTylgibRazXU3Vc0qGn08kD1txvau2Q0597sVnX3+DSykKeH3OmZExAgH/D6+YcuPkC4Yc1V8S2I5wpHBnHLhOReXMcsSaTVt/9ce/zpj9IfPpCuckZcCnjx854msnn3jeGacd27+8LBoWEghIEmmcXX3/o6++9a4/HGoeFMOYZVkKZw9/96YbLrmwNBpyBAkpHSkRQOFcVZiU8MnK1T964rnVGzf5QgEpDjBZcHdjf3fyBc/+5Lb97ratX/eWlqgqYDc2ImLQr7JB5xcdPe6wjQrqfs/BOTNSmaHHHvPyA3efeeLodNaqjyddcehmg65adP+dIY4ZOvhvj9z30qnjfvHbFzNmliH768P3f+urp0oA2xFZs/l/BwBJFNR1AMSWAIHIbNMqLYq+8sDdF54xIZE23F8mIiBABLf+jQBnjTtx1m8fv+jHP1+xvtrn98sD8h+OFBzx92/MOnnY8ddNOi+XD/ePlo26aF9FLBzcFc8zCoaEJMNy2Ob3AtH+WqT/4dlty7o9mhgZY+TxQ+Y8/9QZY0fXxRKWbbtXEBH9uh4NBYN+vzs+xRWY6YwRS6a/f/lFL91zp3SEZZppw3Ak1TXGk+mM4ziubm3+ynlYEYCkUBi9/MDdF54xobYpIWTz3OOg318cDQf9fgBUOOecN8QT/UqK/3DPXdFgQAhxwJ5cAnCSP/3NHxauWddOnLpBpnjUxYaj+rU8u20ZgiOkymVj5T8dyzg8+7C7Ew5EFI7Tr6Tkr4/ed1TfPg3xhKYoACAlFYVDPk3btXff4rXrqnfstB2nOBLy67qQEgB1TamPJ155+z1knGzno+WrQErOWdDvj4ZDnO1/fRyRWVnzuV9MveiMCXsbYrqmSiKfqmqqumXX7jfnfVK9fWco4HNvmqooTYnUKcOPv/Tcs+105mDEKZFMGdmbHn26IRZniDlhFgFICxSVjL6MMc55PnFKlMo6OiWaKv/ZXHTr4uSlO8MKMnTS5uP33nXi8cfVxZKaqkhJjLGgT39j7ifPv/7Gqo2bs5alct6/tPSSs8+49qLzTzjmmEQ6HfT5b37oyXc/nBssLXUce9n6amQ84PNt3L5zx77ak4YOLo5EbMdpThw+G55BnPOFq1ZfcubpxdFwPJmOhoK76+vv/J/fvb9kWSqbDWra7d+Zcu8N11iOg+7bk3TRxNP/+Oa7B6PMJIGCsGXP3u/c+/B7v3mcQDJorakgkfSVDskOOkf79KN4WnZ+vxlQIm0Vs10NGz8sHXYOkOxSF8K6MaBk05n/OP20K77xtcZkWlW4JGKMIcAPnnzu2z/5xdyly5KZjJDSsKzqnTsff+mPZ1z3vVfemhUNB+9+/sXX3psTKCl2HEdRtQ3btn/vsafPvf2nZ95yx2V33lvbGFMVpfUUFSmo5SaRqmvT//HmBXfcVb1tR9/iSM2ney64Y+q/3nvfdBxd0ywpf/27/505f1Ek6BdCIoAQ8qi+fXSfJqQ8mJvgSKFI+vfa9ff9/uU2DestlfWiQROs8AmRYP4NLwAUT5mwb3Fqb2VX79bvVs0h6eZLLtRU1ZV7UlLI739o2p9fmP6qPxr2BwKccwRgiD5NCxRFk1nz5keePP/2qc/+9XU14BdCEgBjmDWtl16bsWjl6kzWDIeDuUqeiBjHnD9IgaKi5VUbzrvjrr/NmXf9fz+2YdPmYHExAkgpVYWjqqzYsInnKAyVc8YOwVUSJBUpn/zbjGlvt+8pdONLyciLs0qfcCDPhhcEkCQtWySqZ2aTdV1aWe8eOBDRsu2BA8q/OnZUJmu6a5ihgL9i/YZn//J3X1mJENJdmHArAJLIEUJRFF3X3l+4hHOOOdECEf3hkN8f4IwpmGczoiOEPxisbYp9557/Xrp+gy8SsR2HmkkCKWRJJJz7PtNZUwhx8L6biARJBvKuZ1+s3r5D4bxNBkTAuVI2+nJTagEt/ygY05E6dxJVM6RjHWmegyFK0xp+3KABfUotx0FEItAV/uqs9+1sliHbb4x3q17+YKDjT4WUkqR7ilvuD3PDSu4vq4ri03VVUT6rjCE6jhMtKfnWVycYloMMiUhVWGXNDjNtfJ7I/cKVUylTpvn/7n90b0NTcwrd8kZJSiVQHB1xMXKdc8y7oSGVtv3U2FD1TtfJju4LKyTLS0pVhbsXiHOWSBtL1m0AVeu8qNB5ybJdcahdWMn9fm4/HyIiY1Y8cf8t1406/thMNssQAVAIeH/x0kM4300SqAhrd+z+46w5iG03NDBGJAJ9honAgKBPy3vHEakxmcVYVXzzR0cWHAhAMHhguRs2iEjlvD4W31vfyJSDekYR2txKRIR82wIYY0BkxBM/uOG/7rhicjyZ4Yw5QhRFQh+vWPnOv+drgcChGnvIEW2A0084/uaLv9XuJCEiicgTu9fw9M6UYRWUphIQgJVuPNJSWURss8KKaDtOxsziwTlJKb9Y8s85My1bBXz2F3feNuXihJEFBEeIgN9XH4v98InnHCE0VT2wkzo6UAgSMOL3v3zvnSXRiJSUcwUIkZnJWmPzu9KxpaC83koCFod9hlLed8xlR5bnIGAIu+sa3ePiEdERTnlpyaAB/aRzUOoPGeSq97Z1jg5PBudG2igOBP7+xC9/cOXkeNpAACFEKOA3DPM/f/Zg5ebNuu8Aa+cdHwYERgDT779ryFEDhJStZBARAAo707jun4xsM99UZLfw6le5IX1lYy49JMlUz9IcAnDnvn2O07zG6DgyGgqMHnws2Xbnn5bla+lod0s6CtJWMjLxxEnDh8554X8umnh6fTzJGDpCFIXD++obL5t6z7wly/2hkDhE/d8cmWD8nmuvuvCMrzhC5J5E6Urthso3g+Qe9pO/Q11VOONKdORlii/adXXS7oFDEqGq1OzZG0ulFM7d4+FNW9x62SVawCfk/lelm5swDKOT449IQq56368gdfs/MrHEpK+fNef5p0YPOa4xkXRrU2XR8JK1VWff+qOPl64MRMJCHBoy3OXZK84+4/6brulwDBQhsqatn+jGtkKOkXOla8in6sd+3V98DJHsunnI3QMHEem6Xr25ZsGqyqBPc49FShnGaSNPuObC882mmKpwlvOZ3QYtAsim0meNP1nhXAjB9ndRGMtzrRhjJKWZTt9xzZX/ePwhn64nMxmGyBCLI6E//PPt8277yfa9e/3hkHOIyGAIDsAJRw/8zZ13uAvL7caoZ+o3m9s/Thl2IdWs5jNKIyMix0yALp6k3m1hBQFAyr/M/gBbqhoMMZ3NPv3j2yZfcF6qtt60bUBkDBmikNJIpa2s+cNrrpzz2yee/tH3pWW1ts+0FTPQSZ2DMZY1TYb4/L1Tf3PXHYZp2o7DEEOBgK5pP37q+e8++qRD5Pf7SErG0P06OBGKhKw4HHrtkXuLwyFqey46InOMWLxqBoDbCkn5pBqG/GoKi0tHXOh+vC69R92WrQgp9VBwxvtzZ17wzUlnfqUhllQVLiRpCp/+4M9+M3zoqzPnbNu7N2tZyFhRKPiVU8f/8Kop5542PpHO3HrZJAl0+yNPKrqOba9ou6WG3LDCGJrZ7KAB5dMf+MXZ48Y0JFJuf6mqKOu21nz3kaeWLl4KkYhpWpBtWeIgAARV09xIhIhSStkCZd7VOERkwByA5++8ffixx7QPKAjCsevWvKYzO+FQ3seUEFSGlmB9x01hXD0MLR3duiqLAAg/efq340cMKwqFDTOrKNxyHI54341X33zppE3bd+5paFIVNnLwcYPK+3HOY8kUQ6yPJ7932UW6ot72qyeJKbm+ol1Yaa1zIKJt2v1LS2c9++vhg46pjyfdrhH3BsdTmVsuv/hn11/tCNGa7BAB5yydMe76ze8bEgkrY4DjgE/XNE0I0bGVdb8i1GHsZ1ddfvnXz9pvJ1hj1TtB2diUyXPok+szOCIyDA6frAbLAORh8PrdCYeUpPv9m7dtv/WRp1577EG/z5c2sqrCJUBDPBn0+SaMHaUwRgCmZRumKYk4Y0I0P3+WbcsO5YDPq3MgouM4pSXFgwcObEqmcjuybMf56tiRZ48bI9ougBORwjCeMh54aXptQ+OU884tLy3asa9u8doqXVWLQqHKrVs1Tfs8/8ERHcTzTzn5wVuu73jiAiKLbV+qJjfE0mZBIhQgEtKpz4RI+YgvS5ugEMIfDr0z9+NvT73/+Z//ZFB5n6ZUxhWbtuNYjuNet5ZRbCSkjISCjnDueWHaYy9OV/y+diwgAymlkFJICYi5ngAQHcfJGNmONfh4KtPxHhORovB4Kk2SwLH7FEdPGja0NFo0ZuiQsM+3p6F+7boqpuv7bZJlCALZoL6l0+6/ExGQ2p+Cnm2ssXd8YFkOUWH1rpCe9Q/pO+RrQHTYzprs/h5SIaQ/Ep758YI1m7f88ns3TDnna8WhgOVI07ZFy1x9zrmmKrqqOI5cvGbdAy9Nnzt/kS8S7ngUAyKGgsGAriqcAaLGGUfeChDnrDgSLLDcKYlUzjgyxhhIuXrTFoaoasrNF08SUrzyznvA+X6Dvrs/KuTzTbtvamk02tZtECKzsommyhlcSluIvHqXEIO6ksVI2aiLDoMI7VlwtPiP4K76hhse+NXzr795xTe/NmHkiKFHHxUKBhgCABqmuXnHzrVbt709b8EbHy8QtuUvioj9NYXbjjN/9ZpdtbVZ0wREn6rVxZuQcyJChmkjO3vxMioMDgLinKUzWdOyUFEyhlHbFNvX2PR4/G8Z00ymM9zn2y9nDEAg+9X3b5h44uh2ZAAASdG45jUVjZTlsPyAgqZwW7KikZdxxXeYTwHrEVsTch+4rGGAZSvBwDHl/YL+5o5O03Y+ra1NNcWBMS3gb9dM1c4s0wTZKh+I6zrnzYJPEjnZ7BdJtwkAVZ+OjAkhhJCISEK4J+GqirL/ehfDWy4677k7f9Dh5FEJyGqrZgUSaxoShdS7EBgGNMU/bHKwfNThP/+rp2xqgpZ2DZ/fzwIBIcXW3XvALUMRAGeqovijYSBo1hOfbz6/r7UVyO2bauWTIfqCwS8unCUQKS2b6lBT3OXQjs+VK0Injh757E/vkG0XXV2tkN67ljeubDIcLMh1QUlQzxaPC5aP6pZjrXsQHK13wr3zuqqipjY7AHf2VmGbi6TsbAPZAa+iETTX1z7PFTIEAVheFJl+313M3f/SNqs2YrsT69+SJKSUhYjQopCe0Y/qM+xcINkthwb2ODjaOhIA6B0HPbkxUWH8jw/cfXR53zZSgwgQpGMm1/+LMzJNh+W70QQQ0LghfWUjL2EMiaBb5gt68zkO2XUUiL++/aazx5/UXoQiAGD92jc1mSxw0VVRuIO8eMyVqi+831WCL7vn6EWmMOYwfvlZp9/+7cnta+REgCy28UO/ua0xbbICHCFjGNRV5djzfNEB3XtIsQfHQfsMBAfwtGHH//5nPxZStgkZRIAssbsy++kCW1AhiyEEGAnqIjKqaOA46O7jq72wcnCXjwEhCwd80x+cGgkGENpUQgHRTtVlNr0tJEmSeRddJWAkqFlaedHISdQd6YkHx6EUoQwVRJx2z51DBrqdfyz3pySd+rWvKSgcAfnAAALwazwrtNJRl3HGsAccWe3BceDGkTmId1/znxef9dXczj8At3UA69e9FaBEynAQZD4RigpXOefhEZdyf7RL+7s8zXEYyEAHccpZpz948391EKESkMVqFmqpjfG0ybCARVeESFBx+p0Z6jOk26WGB8fBilDB2NCjyn879Yet42VyyUjXbbZ2zrNtQTL/oisRRMO6ERja97gzoAdIDS+sHJTUQORBXf/T/XcXh0PucIDc9MTJxhMb3pDCcUQhmwwwHNQNLC4bdfHhXI734OiagMK4AHj+zjvGDR/WRmq4h79JUb/mHz60slb+qQ0EoKvMIl/pmMsZVwF71if14PiCYZhxB/Guqy7/znlfz110dbefILLG6tkBUZdIW3mlBhEyxhljwWGTtFAfIIIeRoenOb6oCIWzxox44OZrpaR2208AWXzHMtawMm44BaYaRUFN9P1KuN+wHiU1PM/xxa8UA4E4oLT4rw/d43ZytNtkYDRsM2vez1hCSpl3vVACFoV9Wf+goiFnUxdPb/Lg6HoRCsynatPvn9qnuCh3p6vbg2NnE01VMxCEU9BOV3I7/0pHXwptumQ9OHpp7ors6R999z9OPjG3qtHa79O07q0gz6YLW3TVFEUQFI28hCk+IkDsoXfBg6MgESqQ33jBN268+FvtKqEIBIj1G2b7rF2xVIGLrkxTWHj4ZD06kKTEHukzPEFaqM9wECYMH/rcXXfI/W0/Se1Zi3XL4lmnkO0nBFgU0q3omGD5aCKJrEc/nF022oEhR+yxDrNwMiSw8mjkD7/4MeccoP0eaCOxL7lxlmk5EvJ3H0rCaFAztKPKRlwARAjY0z9+F71u2sgKxt3h3wrjPdl5diZCkSmcT7t/6ohjBwkh226qRhJmct3rCtiWEHnXTyRAQOcZ8hePuqRZfuKXFY5vTjjl7LEjgz6fYNxhSIAMgSOy3gMJRyaQPXTLteecOk5IyVtGWLqd54hQt/YNjZIZ0y5w3AowXjLyUs0XPvybDA7w8aCunJ/9aW39J6vXzl226t1FS/Y1JYAxkBKkcKfAygI2qnejCHUYm3LW6a8+dM9+F12bNn6oNFQ0FjZuBRDDAZ0d843o0adQj1l07TY4pCT3hAr3P2PJ1OJ1G+avWjt3+YplVZtA4UAAUrjFZ0I4JBPZDp3PQIHs5KHHzX7u8UggANB+p2uqtjpd9ZrlUCGHAhNgcdhnR0aUjrrk8ByF0Ts8hzs11h1u0fqd1Zu2zlux+qOKFUvXrW/KZN1nEYk4MkmCuvgtFSI1ADEU8P/7hadHDT5WErHPyCBEtI1Y4/KXyU6bdv7ZdhIw4ldtvbzvKddBb1Poh+lOuENhoe1Mi121dR8tW/X+kmVL1lVv37cPGO/2oIOInHECePWXP7/07Ikd53eRcGqXT+dmbSpjsQJm/vlULtDX7yu3Nk9261XC/HA/pu5OJSklQ2xtg0gb2Yqq6tmLK/69cnXl5hqTmueQH/6g40qNn1/97Qdvvna/41YaKt9QkxsKmexGhIrCOOfhkVOCfU/odWR0AxxtdYmk5jbdz65a9fad7y6q+KBieUXlhpiRBQQQEuFwBB13D/RFp5/6+q8ecH1GO6kRq1nI9n4cS5pQQFWDAKNBnfqfWTx4Ys9cdO3RcLQLOu6459b7UdsUm7N42QcVK/69cvXu+sbWoKMwTiQPedBhDCSw4wb2//iFp/sURQmAYZultUzDtlTlq7YjC1laI8KSqN/Qj+178pXQ3C2MHhyHIM0haDOPMZHOVG6peW9RxXuLK9ZtqXGQHfKgg4jI0K/5PvrdEycNO77DUA10srH65dPBSpq2U4AIpaCuC7207ynXMa53MjXVg+OQZTpCyo3bd85bsebdhUsWVa5LGBYggDwEmY7b3/X8T2+76ZIL2g/VABJS1i2b7rNr4wXM7yIETVG4qkdPvF4P9+lduWuvgaPzTGf7nn2LKqvmr1o7Z8mK7ftqm4/yPqBMhyMKrvz0ysmPfv+m/U52q6t8S41XxtNWIeNWkGHAp6rHTYoMHNuL6l29FY42mQ6BpDaZTjKdWVK1Yd7y1f9evmrlxi02AJAEKVuCDnU+j4MjCsa+Omr4e8/+WuGu5sHcgBLbuYLtmhNLZaGAeRAEUBzxi5JTi4ed09vJ6GVwdMx02rmTqprtsxdXfFixcsWGjQ2pTG7Q2a+GZQgS2cCysoX/+2x5aYlss5+RANBK7G1Y/rIk4diykPHCRSHd9A3qO+6qlkPF0YOjxwWdhnjiw4qVH1SsWLC6cvOuT4ErQBKEdIcZy5ZaJ0NExmc9/ch/jG/f34WIVjZdv2KaasfTpl3AeGHm15hQon1OvUnR/N01bsWDo7NMR1Kb+oQjREVV9VsfL1y4tnLl+k2m+1ml4ABc4ZaE3/30thvbiVBqburct/JVn7GjqZD+LgTOOQOMnnxdoPjobhy34sFxgO6kZveeWQuWzlywaOWmrY2JFCjq9d88+/c//7Hb+dduP2Pjprm8bkk8lS1o7hQyv674hkwKDzyxV6cnXwo4Oqdkd31DRVX1sqrqe2/4f5qqQodF1/TeSmPjG4YlpCxk1xoWh3128Ymlw791BIjQLxEcbTMdcpdYP/8kKAJAI743tupPJCzbyd8WSoDhgOb4yvuOvxaQHTE+o7n8A18Oc6f9sZxMp1213iWDSCTWv1MUxIyBCuOGKQABgICwY7YiAfwaNyFQOmoKIC9kirnnOXq3ixHZhBnfZTVsMZq2U7YxGNAt2zFNR1DzzFtsnoyKXAGF86KxV/tKjuulS2seHAeKiXSy8T1WQ7XVVGPEdkeDmiTKmo5lC3dLQTSoi/5nlvSwoRoeHF0ORrtRGXa6wWissRqrrdhuJg2GzO9TjMDwvmMnH2Ei1IPjC6hYhDZnoDvZpB3fGd+9Bq10yclXqZr/SBZqHhyefZ55e2U98+DwzIPDMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMg8Mzzzw4PPPg8MyDwzMPDs88ODzz4PDMg8MzDw7PPDg88+DwzDMPDs88ODzz4PDMg8MzDw7PPDg88+DwzIPDMw8Oz7489v8BeMe9at8/90AAAAAASUVORK5CYII=">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<script>
+/* Minimal Google Apps Script mocks: enough to run Code.gs in Node or a browser. */
+(function (root) {
+  function makeMocks(opts) {
+    opts = opts || {};
+    var tz = opts.tz || 'America/Chicago';
+    var state = { sent: [], triggers: [], ownerEmail: opts.ownerEmail || 'owner@example.com', url: opts.url || '' , uuidSeq: 0};
+
+    function Sheet(name) { this.name = name; this.data = []; this.frozen = 0; }
+    Sheet.prototype.getName = function () { return this.name; };
+    Sheet.prototype.width = function () { return this.data.reduce(function (m, r) { return Math.max(m, r.length); }, 0); };
+    Sheet.prototype.getLastRow = function () { return this.data.length; };
+    Sheet.prototype.getLastColumn = function () { return this.width(); };
+    Sheet.prototype.setFrozenRows = function (n) { this.frozen = n; };
+    Sheet.prototype.appendRow = function (row) { this.data.push(row.slice()); return this; };
+    Sheet.prototype.deleteRow = function (r) { this.data.splice(r - 1, 1); };
+    Sheet.prototype.getDataRange = function () { return this.getRange(1, 1, Math.max(this.data.length, 1), Math.max(this.width(), 1)); };
+    Sheet.prototype.getRange = function (row, col, nr, nc) {
+      var sh = this; nr = nr || 1; nc = nc || 1;
+      var range = {
+        getValues: function () {
+          var out = [];
+          for (var i = 0; i < nr; i++) { var r = []; for (var j = 0; j < nc; j++) { var v = (sh.data[row - 1 + i] || [])[col - 1 + j]; r.push(v === undefined ? '' : v); } out.push(r); }
+          if (sh.data.length === 0) return [[]].slice(0, 1).map(function () { return []; });
+          return out;
+        },
+        setValues: function (vals) {
+          if (vals.length !== nr || vals[0].length !== nc) throw new Error('Range size mismatch');
+          for (var i = 0; i < nr; i++) { while (sh.data.length < row + i) sh.data.push([]); for (var j = 0; j < nc; j++) sh.data[row - 1 + i][col - 1 + j] = vals[i][j]; }
+          return range;
+        },
+        setFontWeight: function () { return range; },
+        setNumberFormat: function () { return range; }
+      };
+      return range;
+    };
+
+    var sheets = [new Sheet('Sheet1')];
+    var ss = {
+      getSheetByName: function (n) { return sheets.filter(function (s) { return s.name === n; })[0] || null; },
+      insertSheet: function (n) { var s = new Sheet(n); sheets.push(s); return s; },
+      getSheets: function () { return sheets.slice(); },
+      deleteSheet: function (s) { sheets = sheets.filter(function (x) { return x !== s; }); }
+    };
+
+    function pad(n) { return ('0' + n).slice(-2); }
+    function parts(d) {
+      var f = new Intl.DateTimeFormat('en-US', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' });
+      var o = {}; f.formatToParts(d).forEach(function (p) { o[p.type] = p.value; });
+      return o;
+    }
+
+    var g = {
+      SpreadsheetApp: { getActive: function () { return ss; }, getUi: function () { throw new Error('No UI in tests'); } },
+      Utilities: {
+        getUuid: function () {
+          if (typeof crypto !== 'undefined' && crypto.randomUUID) { try { return crypto.randomUUID(); } catch (e) {} }
+          if (typeof require === 'function') return require('crypto').randomUUID();
+          var h = '0123456789abcdef', out = '';
+          var rnd = function () { if (typeof crypto !== 'undefined' && crypto.getRandomValues) { return crypto.getRandomValues(new Uint8Array(1))[0] % 16; } return Math.floor(Math.random() * 16); };
+          for (var i = 0; i < 36; i++) out += (i === 8 || i === 13 || i === 18 || i === 23) ? '-' : h[rnd()];
+          return out;
+        },
+        formatDate: function (d, zone, fmt) {
+          var p = parts(d);
+          return fmt.replace('yyyy', p.year).replace('MM', p.month).replace('dd', p.day).replace('HH', p.hour);
+        }
+      },
+      Session: { getScriptTimeZone: function () { return tz; }, getEffectiveUser: function () { return { getEmail: function () { return state.ownerEmail; } }; } },
+      LockService: { getScriptLock: function () { return { waitLock: function () {}, releaseLock: function () {} }; } },
+      MailApp: { sendEmail: function (o) { state.sent.push(o); } },
+      ScriptApp: {
+        getProjectTriggers: function () { return state.triggers.slice(); },
+        deleteTrigger: function (t) { state.triggers = state.triggers.filter(function (x) { return x !== t; }); },
+        newTrigger: function (fn) {
+          var t = { fn: fn, kind: null, every: null, getHandlerFunction: function () { return fn; } };
+          return { timeBased: function () { return { everyHours: function (n) { t.kind = 'hours'; t.every = n; return { create: function () { state.triggers.push(t); return t; } }; },
+            everyMinutes: function (n) { t.kind = 'minutes'; t.every = n; return { create: function () { state.triggers.push(t); return t; } }; } }; } };
+        },
+        getService: function () { return { getUrl: function () { return state.url; } }; }
+      },
+      Logger: { log: function () {} },
+      HtmlService: {}
+    };
+    // Save and restore every tab (used by the browser demo to keep data in localStorage).
+    function dump() {
+      return sheets.map(function (sh) {
+        return { name: sh.name, data: sh.data.map(function (r) { return r.map(function (v) { return Object.prototype.toString.call(v) === '[object Date]' ? { __d: v.toISOString() } : v; }); }) };
+      });
+    }
+    function load(saved) {
+      sheets = saved.map(function (x) {
+        var sh = new Sheet(x.name);
+        sh.data = x.data.map(function (r) { return r.map(function (v) { return v && typeof v === 'object' && v.__d ? new Date(v.__d) : v; }); });
+        return sh;
+      });
+    }
+    return { globals: g, state: state, ss: ss, pad: pad, dump: dump, load: load };
+  }
+  if (typeof module !== 'undefined') module.exports = makeMocks; else root.makeMocks = makeMocks;
+})(this);
+
+</script>
+<script>
+/**
+ * C12 Prayer: a shared prayer-request web app for C12 boards.
+ * Google Sheet + Apps Script. Paste this file into Code.gs and the page into Index.html.
+ *
+ * Tabs: Boards, Members, Requests, Settings, Profiles (setup() creates them).
+ * Roles: member (adds own requests), admin (runs one board), super (the Sheet owner; runs every board).
+ */
+
+var APP_NAME = 'C12 Prayer';
+
+var TABS = {
+  Boards: ['BoardId', 'Name', 'AdminName', 'AdminEmail', 'AlertDay', 'AlertHour', 'MembersPerAlert', 'RotationPointer', 'LastAlertMonth', 'Active', 'CreatedAt'],
+  Members: ['MemberId', 'BoardId', 'Name', 'Email', 'Role', 'Token', 'Active', 'SortOrder', 'CreatedAt'],
+  Requests: ['RequestId', 'BoardId', 'MemberId', 'Month', 'Text', 'Status', 'CreatedAt', 'CreatedBy', 'AnsweredAt'],
+  Settings: ['Key', 'Value', 'Notes'],
+  Profiles: ['ProfileId', 'BoardId', 'MemberId', 'Month', 'WalkWithGod', 'DisciplingOthers', 'MarriageFamily', 'PersonalFinances',
+    'BiblicalCommunity', 'FunRecreation', 'FitnessNutrition', 'RestRetreat', 'Wins', 'UpdatedAt', 'UpdatedBy']
+};
+
+// Life & Leadership Balance Wheel areas, in the official C12 Member Snapshot order.
+var PROFILE_AREAS = [
+  { key: 'WalkWithGod', label: 'Walk with God' },
+  { key: 'DisciplingOthers', label: 'Discipling Others' },
+  { key: 'MarriageFamily', label: 'Marriage & Family' },
+  { key: 'PersonalFinances', label: 'Personal Finances' },
+  { key: 'BiblicalCommunity', label: 'Biblical Community' },
+  { key: 'FunRecreation', label: 'Fun & Recreation' },
+  { key: 'FitnessNutrition', label: 'Fitness & Nutrition' },
+  { key: 'RestRetreat', label: 'Rest & Retreat' }
+];
+var MAX_WINS_LINES = 3;
+var MAX_WINS_CHARS = 400;
+
+// Columns that must stay plain text so Sheets never turns them into dates or numbers.
+var TEXT_COLUMNS = {
+  Boards: ['BoardId', 'RotationPointer', 'LastAlertMonth'],
+  Members: ['MemberId', 'BoardId', 'Token'],
+  Requests: ['RequestId', 'BoardId', 'MemberId', 'Month', 'CreatedBy'],
+  Settings: ['Key', 'Value'],
+  Profiles: ['ProfileId', 'BoardId', 'MemberId', 'Month', 'UpdatedBy']
+};
+
+var DEFAULT_SETTINGS = [
+  ['AppName', APP_NAME, 'Name shown in the app header and on the home screen.'],
+  ['AppUrl', '', 'The web app link (ends in /exec). Use the C12 Prayer menu > Save the web app link.'],
+  ['FaviconUrl', 'https://www.joinc12.com/wp-content/uploads/2021/08/cropped-Logo-mark_512x512-192x192.png', 'Browser tab icon: a public https link to a square PNG. Default is the C12 mark from joinc12.com.']
+];
+
+var ROLE = { MEMBER: 'member', ADMIN: 'admin', SUPER: 'super' };
+var MAX_TEXT = 2000;
+
+/* ------------------------------------------------------------------ */
+/* Setup, menu, and web entry points                                   */
+/* ------------------------------------------------------------------ */
+
+/** Run once from the Apps Script editor. Safe to run again; it never deletes data. */
+function setup() {
+  var ss = ss_();
+  Object.keys(TABS).forEach(function (name) {
+    var sh = ss.getSheetByName(name) || ss.insertSheet(name);
+    var head = TABS[name];
+    sh.getRange(1, 1, 1, head.length).setValues([head]).setFontWeight('bold');
+    sh.setFrozenRows(1);
+    TEXT_COLUMNS[name].forEach(function (col) {
+      sh.getRange(1, head.indexOf(col) + 1, 1000, 1).setNumberFormat('@');
+    });
+  });
+
+  var settings = table_('Settings');
+  DEFAULT_SETTINGS.forEach(function (row) {
+    if (!settings.rows.some(function (r) { return r.Key === row[0]; })) {
+      append_('Settings', { Key: row[0], Value: row[1], Notes: row[2] });
+    }
+  });
+
+  var ownerEmail = ownerEmail_();
+  if (table_('Boards').rows.length === 0) {
+    var board = newBoard_('My C12 Board', 'Admin', ownerEmail);
+    append_('Members', newMember_(board.BoardId, 'Admin', ownerEmail, ROLE.SUPER, 1));
+  }
+
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'hourlyCheck') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('hourlyCheck').timeBased().everyHours(1).create();
+
+  var sheet1 = ss.getSheetByName('Sheet1');
+  if (sheet1 && sheet1.getLastRow() === 0 && ss.getSheets().length > 1) ss.deleteSheet(sheet1);
+
+  Logger.log('Setup is done.');
+  return 'ok';
+}
+
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('C12 Prayer')
+    .addItem('Save the web app link', 'menuSaveAppUrl')
+    .addItem("Show everyone's links", 'menuShowLinks')
+    .addSeparator()
+    .addItem('Run setup again', 'setup')
+    .addToUi();
+}
+
+function menuSaveAppUrl() {
+  var ui = SpreadsheetApp.getUi();
+  var res = ui.prompt('Save the web app link', 'Paste the Web app link here. It starts with https://script.google.com and ends with /exec.', ui.ButtonSet.OK_CANCEL);
+  if (res.getSelectedButton() !== ui.Button.OK) return;
+  var url = cleanAppUrl_(res.getResponseText());
+  if (!url) {
+    ui.alert('That does not look like the Web app link. It should start with https://script.google.com and end with /exec.');
+    return;
+  }
+  setSetting_('AppUrl', url);
+  ui.alert('Saved. Next, use C12 Prayer > Show everyone\'s links.');
+}
+
+function menuShowLinks() {
+  var url = appUrl_();
+  var ui = SpreadsheetApp.getUi();
+  if (!url) {
+    ui.alert('First use C12 Prayer > Save the web app link.');
+    return;
+  }
+  var boards = table_('Boards').rows;
+  var members = table_('Members').rows.filter(function (m) { return isTrue_(m.Active); });
+  var html = '<div style="font-family:Arial,sans-serif;font-size:14px">';
+  boards.forEach(function (b) {
+    html += '<h3 style="margin:16px 0 6px">' + esc_(b.Name) + '</h3>';
+    sortMembers_(members.filter(function (m) { return m.BoardId === b.BoardId; })).forEach(function (m) {
+      var link = url + '?t=' + m.Token;
+      html += '<p style="margin:0 0 10px"><b>' + esc_(m.Name) + '</b> (' + esc_(roleLabel_(m.Role)) + ')<br>' +
+        '<input style="width:100%;font-size:13px;padding:4px" readonly onclick="this.select()" value="' + esc_(link) + '"></p>';
+    });
+  });
+  html += '<p style="color:#555">Click a link box, then press Ctrl+C (Cmd+C on a Mac) to copy it.</p></div>';
+  ui.showModalDialog(HtmlService.createHtmlOutput(html).setWidth(720).setHeight(520), "Everyone's personal links");
+}
+
+function doGet(e) {
+  var token = (e && e.parameter && e.parameter.t) ? String(e.parameter.t) : '';
+  if (!getSetting_('AppUrl')) {
+    try {
+      var url = cleanAppUrl_(ScriptApp.getService().getUrl());
+      if (url) setSetting_('AppUrl', url);
+    } catch (err) { /* not deployed yet */ }
+  }
+  var appName = getSetting_('AppName') || APP_NAME;
+  var t = HtmlService.createTemplateFromFile('Index');
+  t.token = token;
+  t.appName = appName;
+  var out = t.evaluate()
+    .setTitle(appName)
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1, viewport-fit=cover')
+    .addMetaTag('apple-mobile-web-app-capable', 'yes')
+    .addMetaTag('mobile-web-app-capable', 'yes');
+  var fav = getSetting_('FaviconUrl');
+  if (fav) {
+    try { out.setFaviconUrl(fav); } catch (err) { /* ignore a bad icon link */ }
+  }
+  return out;
+}
+
+/* ------------------------------------------------------------------ */
+/* The one function the page calls                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Every page action comes through here. The token from the member's personal
+ * link decides who they are and what they may do.
+ */
+function api(token, action, payload) {
+  payload = payload || {};
+  try {
+    var handler = ACTIONS[action];
+    if (!handler) throw new Error('Unknown action.');
+    var lock = handler.write ? LockService.getScriptLock() : null;
+    if (lock) lock.waitLock(20000);
+    try {
+      var ctx = context_(token, payload.boardId);
+      if (handler.need === 'manage' && !ctx.canManage) throw new Error('Only the board admin can do that.');
+      if (handler.need === 'super' && !ctx.isSuper) throw new Error('Only the app owner can do that.');
+      return { ok: true, data: handler.run(ctx, payload) };
+    } finally {
+      if (lock) lock.releaseLock();
+    }
+  } catch (err) {
+    return { ok: false, error: err && err.message ? err.message : String(err) };
+  }
+}
+
+var ACTIONS = {
+  load: { run: function (ctx) { return loadData_(ctx); } },
+
+  saveRequest: { write: true, run: function (ctx, p) {
+    var text = String(p.text || '').trim();
+    if (!text) throw new Error('Please type a prayer request.');
+    if (text.length > MAX_TEXT) throw new Error('Please keep a request under ' + MAX_TEXT + ' characters.');
+    var month = String(p.month || monthKey_(now_()));
+    if (!/^\d{4}-\d{2}$/.test(month)) throw new Error('Pick a month.');
+    if (p.id) {
+      var req = findRequest_(ctx, p.id);
+      requireOwnOrManage_(ctx, req.MemberId);
+      req.Text = text;
+      req.Month = month;
+      update_('Requests', req);
+      return loadData_(ctx);
+    }
+    var memberId = p.memberId || (ctx.me.BoardId === ctx.boardId ? ctx.me.MemberId : '');
+    var member = findMember_(ctx, memberId);
+    requireOwnOrManage_(ctx, member.MemberId);
+    append_('Requests', {
+      RequestId: newId_('r'), BoardId: ctx.boardId, MemberId: member.MemberId, Month: month, Text: text,
+      Status: 'Open', CreatedAt: now_(), CreatedBy: ctx.me.MemberId, AnsweredAt: ''
+    });
+    return loadData_(ctx);
+  } },
+
+  setAnswered: { write: true, run: function (ctx, p) {
+    var req = findRequest_(ctx, p.id);
+    requireOwnOrManage_(ctx, req.MemberId);
+    req.Status = p.answered ? 'Answered' : 'Open';
+    req.AnsweredAt = p.answered ? now_() : '';
+    update_('Requests', req);
+    return loadData_(ctx);
+  } },
+
+  deleteRequest: { write: true, run: function (ctx, p) {
+    var req = findRequest_(ctx, p.id);
+    requireOwnOrManage_(ctx, req.MemberId);
+    remove_('Requests', req);
+    return loadData_(ctx);
+  } },
+
+  saveProfile: { write: true, run: function (ctx, p) {
+    var member = findMember_(ctx, p.memberId || (ctx.me.BoardId === ctx.boardId ? ctx.me.MemberId : ''));
+    requireOwnOrManage_(ctx, member.MemberId);
+    var current = monthKey_(now_());
+    var month = String(p.month || current);
+    var allowed = ctx.canManage ? [current, prevMonthKey_(current)] : [current];
+    if (allowed.indexOf(month) < 0) {
+      throw new Error(ctx.canManage ? 'Profiles can be entered for this month or last month.' : 'You can only fill in this month\'s profile.');
+    }
+    var scores = p.scores || [];
+    if (scores.length !== PROFILE_AREAS.length) throw new Error('Please score all ' + PROFILE_AREAS.length + ' areas.');
+    scores = scores.map(function (v) { return Number(v); });
+    if (!scores.every(function (v) { return v >= 1 && v <= 10 && v === Math.floor(v); })) throw new Error('Each score must be a whole number from 1 to 10.');
+    var wins = String(p.wins || '').replace(/\r/g, '').trim();
+    if (wins.split('\n').length > MAX_WINS_LINES) throw new Error('Please keep big wins to ' + MAX_WINS_LINES + ' lines.');
+    if (wins.length > MAX_WINS_CHARS) throw new Error('Please keep big wins under ' + MAX_WINS_CHARS + ' characters.');
+    var row = findProfile_(ctx.boardId, member.MemberId, month);
+    var isNew = !row;
+    row = row || { ProfileId: newId_('f'), BoardId: ctx.boardId, MemberId: member.MemberId, Month: month };
+    PROFILE_AREAS.forEach(function (a, i) { row[a.key] = scores[i]; });
+    row.Wins = wins;
+    row.UpdatedAt = now_();
+    row.UpdatedBy = ctx.me.MemberId;
+    if (isNew) append_('Profiles', row); else update_('Profiles', row);
+    return loadData_(ctx);
+  } },
+
+  saveMember: { write: true, need: 'manage', run: function (ctx, p) {
+    var name = String(p.name || '').trim();
+    var email = String(p.email || '').trim().toLowerCase();
+    if (!name) throw new Error('Please enter a name.');
+    if (!isEmail_(email)) throw new Error('Please enter a valid email address.');
+    var others = boardMembers_(ctx.boardId, true).filter(function (m) { return m.MemberId !== p.id; });
+    if (others.some(function (m) { return String(m.Email).toLowerCase() === email; })) throw new Error('Someone on this board already uses that email.');
+    if (p.id) {
+      var m = findMember_(ctx, p.id);
+      m.Name = name;
+      m.Email = email;
+      update_('Members', m);
+      syncBoardAdmin_(ctx.boardId);
+    } else {
+      var order = boardMembers_(ctx.boardId, false).reduce(function (mx, x) { return Math.max(mx, Number(x.SortOrder) || 0); }, 0) + 1;
+      append_('Members', newMember_(ctx.boardId, name, email, ROLE.MEMBER, order));
+    }
+    return loadData_(ctx);
+  } },
+
+  removeMember: { write: true, need: 'manage', run: function (ctx, p) {
+    var m = findMember_(ctx, p.id);
+    if (m.MemberId === ctx.me.MemberId) throw new Error('You cannot remove yourself.');
+    if (m.Role === ROLE.SUPER) throw new Error('The app owner cannot be removed.');
+    if (m.Role === ROLE.ADMIN && !ctx.isSuper) throw new Error('Only the app owner can remove a board admin.');
+    m.Active = false;
+    if (m.Role === ROLE.ADMIN) m.Role = ROLE.MEMBER;
+    update_('Members', m);
+    syncBoardAdmin_(ctx.boardId);
+    return loadData_(ctx);
+  } },
+
+  resetLink: { write: true, need: 'manage', run: function (ctx, p) {
+    var m = findMember_(ctx, p.id);
+    if (m.Role === ROLE.SUPER && !ctx.isSuper) throw new Error('Only the app owner can change that link.');
+    m.Token = newToken_();
+    update_('Members', m);
+    return loadData_(ctx);
+  } },
+
+  saveBoard: { write: true, need: 'manage', run: function (ctx, p) {
+    var b = ctx.board;
+    var name = String(p.name || '').trim();
+    var day = Number(p.alertDay), hour = Number(p.alertHour), per = Number(p.membersPerAlert);
+    if (!name) throw new Error('Please enter a board name.');
+    if (!(day >= 1 && day <= 31 && day === Math.floor(day))) throw new Error('Pick a day from 1 to 31.');
+    if (!(hour >= 0 && hour <= 23 && hour === Math.floor(hour))) throw new Error('Pick a time.');
+    if (!(per >= 1 && per <= 20 && per === Math.floor(per))) throw new Error('Pick how many members to include.');
+    b.Name = name; b.AlertDay = day; b.AlertHour = hour; b.MembersPerAlert = per;
+    update_('Boards', b);
+    return loadData_(ctx);
+  } },
+
+  sendTestAlert: { write: true, need: 'manage', run: function (ctx) {
+    var sent = sendBoardAlert_(ctx.board, false);
+    var data = loadData_(ctx);
+    data.notice = sent ? 'Test alert sent to ' + sent + '.' : 'Add members first.';
+    return data;
+  } },
+
+  createBoard: { write: true, need: 'super', run: function (ctx, p) {
+    var name = String(p.name || '').trim();
+    var adminName = String(p.adminName || '').trim();
+    var adminEmail = String(p.adminEmail || '').trim().toLowerCase();
+    if (!name) throw new Error('Please enter a board name.');
+    if (!adminName) throw new Error("Please enter the admin's name.");
+    if (!isEmail_(adminEmail)) throw new Error("Please enter the admin's email address.");
+    var b = newBoard_(name, adminName, adminEmail);
+    append_('Members', newMember_(b.BoardId, adminName, adminEmail, ROLE.ADMIN, 1));
+    var data = loadData_(context_(ctx.me.Token, b.BoardId));
+    data.notice = 'Board created. Copy the admin link from Members.';
+    return data;
+  } },
+
+  assignAdmin: { write: true, need: 'super', run: function (ctx, p) {
+    var m = findMember_(ctx, p.id);
+    boardMembers_(ctx.boardId, false).forEach(function (x) {
+      if (x.Role === ROLE.ADMIN && x.MemberId !== m.MemberId) { x.Role = ROLE.MEMBER; update_('Members', x); }
+    });
+    if (m.Role !== ROLE.SUPER) { m.Role = ROLE.ADMIN; update_('Members', m); }
+    var b = ctx.board;
+    b.AdminName = m.Name; b.AdminEmail = m.Email;
+    update_('Boards', b);
+    return loadData_(ctx);
+  } }
+};
+
+/* ------------------------------------------------------------------ */
+/* Who is asking, and what they can see                                */
+/* ------------------------------------------------------------------ */
+
+function context_(token, boardId) {
+  token = String(token || '').trim();
+  if (!token) throw new Error('NO_LINK');
+  var me = table_('Members').rows.filter(function (m) { return m.Token === token && isTrue_(m.Active); })[0];
+  if (!me) throw new Error('BAD_LINK');
+  var isSuper = me.Role === ROLE.SUPER;
+  var target = boardId || me.BoardId;
+  if (target !== me.BoardId && !isSuper) throw new Error('You can only see your own board.');
+  var board = table_('Boards').rows.filter(function (b) { return b.BoardId === target; })[0];
+  if (!board) throw new Error('That board was not found.');
+  var isAdminHere = me.BoardId === board.BoardId && me.Role === ROLE.ADMIN;
+  return { me: me, isSuper: isSuper, canManage: isSuper || isAdminHere, board: board, boardId: board.BoardId };
+}
+
+function loadData_(ctx) {
+  var members = boardMembers_(ctx.boardId, true);
+  var ids = {};
+  members.forEach(function (m) { ids[m.MemberId] = true; });
+  var requests = table_('Requests').rows.filter(function (r) { return r.BoardId === ctx.boardId && ids[r.MemberId]; });
+  var url = ctx.canManage ? appUrl_() : '';
+  var b = ctx.board;
+  var month = monthKey_(now_());
+  var prev = prevMonthKey_(month);
+  var data = {
+    appName: getSetting_('AppName') || APP_NAME,
+    month: month,
+    prevMonth: prev,
+    profileAreas: PROFILE_AREAS.map(function (a) { return a.label; }),
+    profiles: profilesFor_(ctx.boardId, [month, prev]).filter(function (f) { return ids[f.MemberId]; }).map(function (f) {
+      return { memberId: f.MemberId, month: f.Month, scores: PROFILE_AREAS.map(function (a) { return Number(f[a.key]) || 0; }), wins: String(f.Wins || ''), updatedAt: iso_(f.UpdatedAt) };
+    }),
+    me: { id: ctx.me.MemberId, name: ctx.me.Name, email: ctx.me.Email, boardId: ctx.me.BoardId },
+    isSuper: ctx.isSuper,
+    canManage: ctx.canManage,
+    board: { id: b.BoardId, name: b.Name, adminName: b.AdminName, adminEmail: b.AdminEmail },
+    members: members.map(function (m) {
+      var o = { id: m.MemberId, name: m.Name, email: m.Email, role: m.Role };
+      if (ctx.canManage) o.link = url ? url + '?t=' + m.Token : '';
+      return o;
+    }),
+    requests: requests.map(function (r) {
+      return { id: r.RequestId, memberId: r.MemberId, month: r.Month, text: r.Text, status: r.Status || 'Open', createdAt: iso_(r.CreatedAt), answeredAt: iso_(r.AnsweredAt) };
+    })
+  };
+  if (ctx.canManage) {
+    data.board.alertDay = Number(b.AlertDay) || 1;
+    data.board.alertHour = Number(b.AlertHour) || 0;
+    data.board.membersPerAlert = Number(b.MembersPerAlert) || 1;
+    data.board.lastAlertMonth = b.LastAlertMonth;
+    data.board.nextUp = nextInRotation_(b, members).map(function (m) { return m.Name; });
+    data.linksReady = !!url;
+  }
+  if (ctx.isSuper) {
+    var all = table_('Members').rows.filter(function (m) { return isTrue_(m.Active); });
+    data.boards = table_('Boards').rows.map(function (x) {
+      return { id: x.BoardId, name: x.Name, adminName: x.AdminName, memberCount: all.filter(function (m) { return m.BoardId === x.BoardId; }).length };
+    });
+  }
+  return data;
+}
+
+/** Profiles for one board in the given months. Older Sheets without a Profiles tab return none. */
+function profilesFor_(boardId, months) {
+  var sh = ss_().getSheetByName('Profiles');
+  if (!sh) return [];
+  return table_('Profiles').rows.filter(function (f) { return f.BoardId === boardId && months.indexOf(f.Month) >= 0; });
+}
+
+function findProfile_(boardId, memberId, month) {
+  if (!ss_().getSheetByName('Profiles')) throw new Error('The Profiles tab is missing. Ask the app owner to run setup again.');
+  return table_('Profiles').rows.filter(function (f) { return f.BoardId === boardId && f.MemberId === memberId && f.Month === month; })[0] || null;
+}
+
+function requireOwnOrManage_(ctx, memberId) {
+  if (memberId !== ctx.me.MemberId && !ctx.canManage) throw new Error('You can only change your own requests.');
+}
+
+function findRequest_(ctx, id) {
+  var r = table_('Requests').rows.filter(function (x) { return x.RequestId === id && x.BoardId === ctx.boardId; })[0];
+  if (!r) throw new Error('That request was not found. Pull down to refresh.');
+  return r;
+}
+
+function findMember_(ctx, id) {
+  var m = boardMembers_(ctx.boardId, true).filter(function (x) { return x.MemberId === id; })[0];
+  if (!m) throw new Error('That member was not found on this board.');
+  return m;
+}
+
+function boardMembers_(boardId, activeOnly) {
+  return sortMembers_(table_('Members').rows.filter(function (m) {
+    return m.BoardId === boardId && (!activeOnly || isTrue_(m.Active));
+  }));
+}
+
+function sortMembers_(list) {
+  return list.slice().sort(function (a, b) {
+    return (Number(a.SortOrder) || 0) - (Number(b.SortOrder) || 0) || String(a.Name).localeCompare(String(b.Name));
+  });
+}
+
+function syncBoardAdmin_(boardId) {
+  var b = table_('Boards').rows.filter(function (x) { return x.BoardId === boardId; })[0];
+  var admin = boardMembers_(boardId, true).filter(function (m) { return m.Role === ROLE.ADMIN; })[0] ||
+    boardMembers_(boardId, true).filter(function (m) { return m.Role === ROLE.SUPER; })[0];
+  if (b && admin && (b.AdminName !== admin.Name || b.AdminEmail !== admin.Email)) {
+    b.AdminName = admin.Name; b.AdminEmail = admin.Email;
+    update_('Boards', b);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Monthly alerts                                                      */
+/* ------------------------------------------------------------------ */
+
+/** Runs every hour (set up by setup()). Sends each board's alert once a month on its day and hour. */
+function hourlyCheck() {
+  var now = now_();
+  var tz = tz_();
+  var y = Number(Utilities.formatDate(now, tz, 'yyyy'));
+  var mo = Number(Utilities.formatDate(now, tz, 'MM'));
+  var d = Number(Utilities.formatDate(now, tz, 'dd'));
+  var h = Number(Utilities.formatDate(now, tz, 'HH'));
+  var key = monthKey_(now);
+  var results = [];
+  table_('Boards').rows.forEach(function (b) {
+    if (!isTrue_(b.Active)) return;
+    if (normMonth_(b.LastAlertMonth) === key) return;
+    var day = Math.min(Number(b.AlertDay) || 1, daysInMonth_(y, mo));
+    if (d !== day || h < (Number(b.AlertHour) || 0)) return;
+    try {
+      var lock = LockService.getScriptLock();
+      lock.waitLock(20000);
+      try {
+        var fresh = table_('Boards').rows.filter(function (x) { return x.BoardId === b.BoardId; })[0];
+        if (fresh && normMonth_(fresh.LastAlertMonth) !== key) {
+          sendBoardAlert_(fresh, true);
+          results.push(fresh.BoardId);
+        }
+      } finally { lock.releaseLock(); }
+    } catch (err) {
+      Logger.log('Alert failed for board ' + b.Name + ': ' + err);
+    }
+  });
+  return results;
+}
+
+/** The next members in line for this board's alert. */
+function nextInRotation_(board, members) {
+  if (!members.length) return [];
+  var per = Math.min(Math.max(Number(board.MembersPerAlert) || 1, 1), members.length);
+  var start = members.map(function (m) { return m.MemberId; }).indexOf(board.RotationPointer) + 1;
+  var out = [];
+  for (var i = 0; i < per; i++) out.push(members[(start + i) % members.length]);
+  return out;
+}
+
+/**
+ * Emails the board admin the next member(s) in rotation.
+ * advance=true moves the rotation forward and marks this month as sent.
+ * Returns the address it sent to, or '' when the board has no members.
+ */
+function sendBoardAlert_(board, advance) {
+  var members = boardMembers_(board.BoardId, true);
+  var picked = nextInRotation_(board, members);
+  if (!picked.length) return '';
+  var to = String(board.AdminEmail || '').trim() || ownerEmail_();
+  var allReqs = table_('Requests').rows.filter(function (r) { return r.BoardId === board.BoardId; });
+  var appName = getSetting_('AppName') || APP_NAME;
+  var names = picked.map(function (m) { return m.Name; });
+  var subject = appName + ': this month, pray for ' + names.join(', ');
+  var text = [], html = ['<div style="font-family:Arial,sans-serif;font-size:15px;color:#111">'];
+  html.push('<p>Here is who to pray for this month on <b>' + esc_(board.Name) + '</b>.</p>');
+  text.push('Here is who to pray for this month on ' + board.Name + '.', '');
+  picked.forEach(function (m) {
+    var open = allReqs.filter(function (r) { return r.MemberId === m.MemberId && (r.Status || 'Open') === 'Open'; })
+      .sort(function (a, b) { return dateNum_(b.CreatedAt) - dateNum_(a.CreatedAt); });
+    html.push('<h3 style="margin:18px 0 6px">' + esc_(m.Name) + '</h3>');
+    text.push(m.Name);
+    if (!open.length) {
+      html.push('<p style="color:#555">No current request. A short note asking how you can pray may be welcome.</p>');
+      text.push('  No current request. A short note asking how you can pray may be welcome.');
+    }
+    open.forEach(function (r) {
+      html.push('<p style="margin:0 0 10px;white-space:pre-line">' + esc_(r.Text) + '<br><span style="color:#777;font-size:13px">' + esc_(monthLabel_(normMonth_(r.Month))) + '</span></p>');
+      text.push('  ' + String(r.Text).replace(/\n/g, '\n  ') + ' (' + monthLabel_(normMonth_(r.Month)) + ')');
+    });
+    html.push('<p style="margin:0 0 6px"><a href="mailto:' + esc_(m.Email) + '">Email ' + esc_(m.Name) + '</a></p>');
+    text.push('  Email: ' + m.Email, '');
+  });
+  html.push('<hr style="border:0;border-top:1px solid #ddd;margin:20px 0"><p style="color:#555;font-size:13px">Everyone on ' + esc_(board.Name) + ':<br>');
+  html.push(members.map(function (m) { return esc_(m.Name) + ' &lt;' + esc_(m.Email) + '&gt;'; }).join('<br>') + '</p>');
+  if (!advance) html.push('<p style="color:#777;font-size:13px">This was a test. The rotation did not move.</p>');
+  html.push('</div>');
+  text.push('Everyone on ' + board.Name + ':');
+  members.forEach(function (m) { text.push(m.Name + ' <' + m.Email + '>'); });
+  MailApp.sendEmail({ to: to, subject: (advance ? '' : '[Test] ') + subject, body: text.join('\n'), htmlBody: html.join(''), name: appName });
+  if (advance) {
+    board.RotationPointer = picked[picked.length - 1].MemberId;
+    board.LastAlertMonth = monthKey_(now_());
+    update_('Boards', board);
+  }
+  return to;
+}
+
+/* ------------------------------------------------------------------ */
+/* Sheet helpers                                                       */
+/* ------------------------------------------------------------------ */
+
+function ss_() { return SpreadsheetApp.getActive(); }
+
+function table_(name) {
+  var sh = ss_().getSheetByName(name);
+  if (!sh) throw new Error('The ' + name + ' tab is missing. Run setup first.');
+  var values = sh.getDataRange().getValues();
+  var head = values.shift() || [];
+  var rows = values.map(function (r, i) {
+    var o = { _row: i + 2 };
+    head.forEach(function (h, j) { o[h] = normCell_(name, h, r[j]); });
+    return o;
+  }).filter(function (o) { return o[head[0]] !== ''; });
+  return { sheet: sh, head: head, rows: rows };
+}
+
+function normCell_(tab, col, v) {
+  if (TEXT_COLUMNS[tab] && TEXT_COLUMNS[tab].indexOf(col) >= 0) {
+    if (col === 'Month' || col === 'LastAlertMonth') return normMonth_(v);
+    return v === null || v === undefined ? '' : String(v).trim();
+  }
+  return v;
+}
+
+function append_(name, obj) {
+  var sh = ss_().getSheetByName(name);
+  var head = TABS[name];
+  sh.appendRow(head.map(function (h) { return obj[h] === undefined ? '' : obj[h]; }));
+}
+
+function update_(name, obj) {
+  var sh = ss_().getSheetByName(name);
+  var head = TABS[name];
+  sh.getRange(obj._row, 1, 1, head.length).setValues([head.map(function (h) { return obj[h] === undefined ? '' : obj[h]; })]);
+}
+
+function remove_(name, obj) {
+  ss_().getSheetByName(name).deleteRow(obj._row);
+}
+
+function getSetting_(key) {
+  try {
+    var r = table_('Settings').rows.filter(function (x) { return x.Key === key; })[0];
+    return r ? String(r.Value || '').trim() : '';
+  } catch (err) { return ''; }
+}
+
+function setSetting_(key, value) {
+  var r = table_('Settings').rows.filter(function (x) { return x.Key === key; })[0];
+  if (r) { r.Value = value; update_('Settings', r); }
+  else append_('Settings', { Key: key, Value: value, Notes: '' });
+}
+
+function newBoard_(name, adminName, adminEmail) {
+  var b = {
+    BoardId: newId_('b'), Name: name, AdminName: adminName, AdminEmail: adminEmail,
+    AlertDay: 1, AlertHour: 8, MembersPerAlert: 1, RotationPointer: '', LastAlertMonth: '', Active: true, CreatedAt: now_()
+  };
+  append_('Boards', b);
+  return b;
+}
+
+function newMember_(boardId, name, email, role, order) {
+  return { MemberId: newId_('m'), BoardId: boardId, Name: name, Email: email, Role: role, Token: newToken_(), Active: true, SortOrder: order, CreatedAt: now_() };
+}
+
+/* ------------------------------------------------------------------ */
+/* Small utilities                                                     */
+/* ------------------------------------------------------------------ */
+
+function now_() { return new Date(); }
+function tz_() { return Session.getScriptTimeZone() || 'America/Chicago'; }
+function monthKey_(d) { return Utilities.formatDate(d, tz_(), 'yyyy-MM'); }
+/** The month before a yyyy-MM key, rolling back across January. */
+function prevMonthKey_(key) {
+  var m = String(key).match(/^(\d{4})-(\d{2})$/);
+  if (!m) return '';
+  var y = Number(m[1]), mo = Number(m[2]) - 1;
+  if (mo === 0) { y -= 1; mo = 12; }
+  return y + '-' + ('0' + mo).slice(-2);
+}
+function daysInMonth_(y, m) { return new Date(y, m, 0).getDate(); }
+function newId_(prefix) { return prefix + Utilities.getUuid().replace(/-/g, '').slice(0, 12); }
+/** 160 random bits as letters and digits, starting with a letter so Sheets keeps it as text. */
+function newToken_() { return 'p' + (Utilities.getUuid() + Utilities.getUuid()).replace(/-/g, '').slice(0, 40); }
+function isDate_(v) { return Object.prototype.toString.call(v) === '[object Date]' && !isNaN(v.getTime()); }
+function isTrue_(v) { return v === true || String(v).toUpperCase() === 'TRUE'; }
+function isEmail_(s) { return /^[^\s@<>,;"]+@[^\s@<>,;"]+\.[^\s@<>,;"]+$/.test(s); }
+function iso_(v) { return isDate_(v) ? v.toISOString() : (v ? String(v) : ''); }
+function dateNum_(v) { return isDate_(v) ? v.getTime() : (Date.parse(v) || 0); }
+function roleLabel_(r) { return r === ROLE.SUPER ? 'app owner' : r === ROLE.ADMIN ? 'board admin' : 'member'; }
+function ownerEmail_() {
+  try { return Session.getEffectiveUser().getEmail() || ''; } catch (err) { return ''; }
+}
+
+function normMonth_(v) {
+  if (isDate_(v)) return Utilities.formatDate(v, tz_(), 'yyyy-MM');
+  var s = String(v === null || v === undefined ? '' : v).trim();
+  var m = s.match(/^(\d{4})-(\d{1,2})/);
+  return m ? m[1] + '-' + ('0' + m[2]).slice(-2) : s;
+}
+
+function monthLabel_(key) {
+  var names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var m = String(key).match(/^(\d{4})-(\d{2})$/);
+  return m ? names[Number(m[2]) - 1] + ' ' + m[1] : String(key);
+}
+
+function cleanAppUrl_(u) {
+  u = String(u || '').trim().replace(/\?.*$/, '').replace(/\/dev$/, '/exec');
+  return /^https:\/\/script\.google\.com\/.+\/exec$/.test(u) ? u : '';
+}
+
+function appUrl_() {
+  var u = cleanAppUrl_(getSetting_('AppUrl'));
+  if (u) return u;
+  try { return cleanAppUrl_(ScriptApp.getService().getUrl()); } catch (err) { return ''; }
+}
+
+function esc_(s) {
+  return String(s === null || s === undefined ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+</script>
+<script>
+
+(function () {
+  var KEY = 'c12-prayer-demo-v2';
+  var PERSONA_KEY = 'c12-prayer-demo-persona';
+  var PERSONAS = [
+    { name: 'Casey Turner', label: 'Member (Board A)' },
+    { name: 'Jordan Ellis', label: 'Board admin (Board A)' },
+    { name: 'Morgan Hale', label: 'App owner (all boards)' },
+    { name: 'Rowan Price', label: 'Member (Board B)' }
+  ];
+  window.DEMO_PERSONAS = PERSONAS;
+
+  var m = makeMocks({ url: 'https://script.google.com/macros/s/DEMO/exec', ownerEmail: 'morgan.hale@example.com' });
+  Object.keys(m.globals).forEach(function (k) { window[k] = m.globals[k]; });
+  window.__demoMocks = m;
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(m.dump())); } catch (e) {} }
+
+  var TEXTS = [
+    'Wisdom for a big decision at work this month',
+    'Health and a quick recovery for my mother after surgery',
+    'Patience and energy with three busy kids at home',
+    'Our team as we launch a new product line',
+    'Clarity on whether to expand into a second location',
+    'Peace for a friend who just lost his job',
+    'Strength to lead well through a hard season of layoffs',
+    'Safe travel for our family over the holidays',
+    'A good hire for our open operations manager role',
+    'Rest and margin. My calendar has been too full',
+    'Healing for a key employee battling cancer',
+    'Our marriage as we celebrate 20 years',
+    'Favor in a contract negotiation with a large client',
+    'My son as he starts college and finds community',
+    'Courage to have a difficult conversation with a partner',
+    'Steady cash flow through a slow quarter',
+    'Growth in my daily time with God',
+    'Unity on our leadership team',
+    'Wisdom caring for aging parents',
+    'Our company to be a light to our customers and vendors',
+    'A smooth closing on our new office building',
+    'Encouragement for my wife, who is carrying a lot right now'
+  ];
+
+  function monthKeyOffset(off) {
+    var d = new Date(); d.setDate(1); d.setMonth(d.getMonth() + off);
+    return { key: d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2), y: d.getFullYear(), m: d.getMonth() };
+  }
+
+  function seed() {
+    setup();
+    var b1 = table_('Boards').rows[0];
+    b1.Name = 'Demo Board A'; b1.AlertDay = 1; b1.AlertHour = 8; b1.MembersPerAlert = 1;
+    update_('Boards', b1);
+    var owner = table_('Members').rows[0];
+    owner.Name = 'Morgan Hale'; owner.Email = 'morgan.hale@example.com';
+    update_('Members', owner);
+    setSetting_('AppUrl', 'https://script.google.com/macros/s/DEMO/exec');
+    var tok = owner.Token;
+    function email(n) { return n.toLowerCase().replace(/[^a-z ]/g, '').replace(' ', '.') + '@example.com'; }
+    ['Jordan Ellis', 'Casey Turner', 'Riley Bennett', 'Taylor Brooks', 'Avery Collins', 'Quinn Harper', 'Drew Mitchell',
+     'Parker Lane', 'Hayden Cole', 'Reese Walker', 'Logan Pierce', 'Cameron Reed'].forEach(function (n) {
+      api(tok, 'saveMember', { name: n, email: email(n) });
+    });
+    var jordan = table_('Members').rows.filter(function (x) { return x.Name === 'Jordan Ellis'; })[0];
+    api(tok, 'assignAdmin', { id: jordan.MemberId });
+    var r = api(tok, 'createBoard', { name: 'Demo Board B', adminName: 'Jamie Foster', adminEmail: email('Jamie Foster') });
+    var b2 = r.data.board.id;
+    ['Skyler Grant', 'Rowan Price', 'Emerson Hayes', 'Blake Sutton'].forEach(function (n) {
+      api(tok, 'saveMember', { boardId: b2, name: n, email: email(n) });
+    });
+    var b2row = table_('Boards').rows.filter(function (x) { return x.BoardId === b2; })[0];
+    b2row.AlertDay = 15; b2row.AlertHour = 7; update_('Boards', b2row);
+
+    // 1 to 3 requests per member over the last three months; some older ones answered.
+    var members = table_('Members').rows;
+    var t = 0;
+    members.forEach(function (mem, i) {
+      var count = 1 + (i * 7 % 3);
+      for (var k = 0; k < count; k++) {
+        var mk = monthKeyOffset(-k);
+        var day = 2 + ((i * 5 + k * 3) % 24);
+        var created = new Date(mk.y, mk.m, day, 9 + (i % 8), 15);
+        if (created > new Date()) created = new Date(Date.now() - (k + 1) * 3600 * 1000);
+        var answered = k > 0 && (i + k) % 2 === 0;
+        append_('Requests', {
+          RequestId: newId_('r'), BoardId: mem.BoardId, MemberId: mem.MemberId, Month: mk.key,
+          Text: TEXTS[t++ % TEXTS.length] + (i % 4 === 1 && k === 0 ? '\nAlso: rest for my family this weekend' : ''),
+          Status: answered ? 'Answered' : 'Open', CreatedAt: created, CreatedBy: mem.MemberId,
+          AnsweredAt: answered ? new Date(created.getTime() + 12 * 86400000) : ''
+        });
+      }
+    });
+    // Balance Wheel profiles for this month and last month. Riley has none this month and
+    // Parker has none last month, to show the empty state.
+    var WINS = ['Closed our biggest contract of the year', 'Celebrated 15 years in business', 'Daughter got engaged',
+      'Finished a half marathon', 'Promoted two team leaders', 'Family week at the lake', 'Paid off the building loan',
+      'Started a Bible study with our managers', '', '', ''];
+    var cur = monthKeyOffset(0), prv = monthKeyOffset(-1);
+    members.forEach(function (mem, i) {
+      [prv, cur].forEach(function (mk, j) {
+        if ((mem.Name === 'Riley Bennett' && j === 1) || (mem.Name === 'Parker Lane' && j === 0)) return;
+        var row = { ProfileId: newId_('f'), BoardId: mem.BoardId, MemberId: mem.MemberId, Month: mk.key, UpdatedBy: mem.MemberId };
+        PROFILE_AREAS.forEach(function (a, k) {
+          var base = 4 + ((i * 3 + k * 5) % 6);            // 4 to 9
+          var drift = j === 1 ? ((i + k) % 3) - 1 : 0;      // this month moves a little
+          row[a.key] = Math.max(2, Math.min(10, base + drift + (k === 7 ? -1 : 0)));
+        });
+        var w = WINS[(i * 2 + j) % WINS.length];
+        row.Wins = w && i % 3 === 0 ? w + '\nGood rhythm of rest this month' : w;
+        var dd = new Date(mk.y, mk.m, 3 + (i % 20), 19, 0);
+        row.UpdatedAt = dd > new Date() ? new Date() : dd;
+        append_('Profiles', row);
+      });
+    });
+    // Put Board A's rotation partway through the list.
+    var b1row = table_('Boards').rows[0];
+    b1row.RotationPointer = members.filter(function (x) { return x.Name === 'Taylor Brooks'; })[0].MemberId;
+    update_('Boards', b1row);
+  }
+
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (saved) m.load(saved); else { seed(); save(); }
+
+  window.demoReset = function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    location.reload();
+  };
+  window.demoSetPersona = function (name) {
+    try { localStorage.setItem(PERSONA_KEY, name); } catch (e) {}
+    location.reload();
+  };
+  var persona = null;
+  try { persona = localStorage.getItem(PERSONA_KEY); } catch (e) {}
+  if (!PERSONAS.some(function (p) { return p.name === persona; })) persona = PERSONAS[0].name;
+  window.DEMO_PERSONA = persona;
+  var me = table_('Members').rows.filter(function (x) { return x.Name === persona && isTrue_(x.Active); })[0]
+    || table_('Members').rows.filter(function (x) { return x.Role === 'super'; })[0];
+  window.__TOKEN = me.Token;
+
+  // A stand-in for google.script.run that calls Code.gs right here in the page.
+  function runner(ok, fail) {
+    return new Proxy({}, { get: function (t, k) {
+      if (k === 'withSuccessHandler') return function (fn) { return runner(fn, fail); };
+      if (k === 'withFailureHandler') return function (fn) { return runner(ok, fn); };
+      return function () {
+        var args = arguments;
+        setTimeout(function () {
+          try {
+            var res = JSON.parse(JSON.stringify(window[k].apply(null, args)));
+            if (args[1] !== 'load') save();
+            if (args[1] === 'sendTestAlert' && res.ok && res.data.notice) {
+              res.data.notice = res.data.notice.replace('Test alert sent to', 'Demo: the alert email would go to').replace(/\.$/, '') + '. No email was sent.';
+            }
+            if (ok) ok(res);
+          } catch (e) { if (fail) fail(e); }
+        }, 120);
+      };
+    } });
+  }
+  window.google = { script: { run: runner(null, null), url: { getLocation: function (cb) { cb({ parameter: {} }); } } } };
+})();
+
+</script>
+<meta charset="utf-8">
+<style>
+  :root {
+    --navy: #152d38;
+    --navy-2: #1e3c49;
+    --navy-3: #2b5162;
+    --line: rgba(255,255,255,.10);
+    --text: #ffffff;
+    --muted: #a9bcc5;
+    --gold: #d7b883;
+    --gold-2: #e1c495;
+    --on-gold: #10262f;
+    --paper: #ffffff;
+    --ink: #1d2733;
+    --ink-muted: #6b7785;
+    --red: #c0392b;
+    --safe-top: max(env(safe-area-inset-top), 0px);
+    --safe-bottom: max(env(safe-area-inset-bottom), 12px);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--text); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 17px; line-height: 1.4; min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right);
+  }
+  button, input, select, textarea { font: inherit; }
+  button { cursor: pointer; }
+  a { color: inherit; }
+
+  /* Header */
+  .top {
+    position: sticky; top: 0; z-index: 20; background: var(--navy);
+    padding: calc(var(--safe-top) + 8px) 12px 8px;
+    display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 4px;
+    border-bottom: 1px solid var(--line);
+  }
+  .icon-btn {
+    width: 48px; height: 48px; border: 0; background: transparent; color: var(--text);
+    display: inline-flex; align-items: center; justify-content: center; border-radius: 12px;
+  }
+  .icon-btn:active { background: var(--navy-3); }
+  .back { display: inline-flex; align-items: center; gap: 2px; height: 48px; padding: 0 6px; border: 0; background: transparent; color: var(--text); font-weight: 600; font-size: 15px; letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; }
+  .title { text-align: center; min-width: 0; }
+  .title b { display: block; font-size: 15px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+  .brand { display: inline-flex; align-items: center; gap: 7px; }
+  .brand .logo { width: 26px; height: 26px; object-fit: contain; background: #fff; border-radius: 6px; padding: 2px; }
+  .logo-tile { display: inline-flex; width: 88px; height: 88px; border-radius: 20px; background: #fff; align-items: center; justify-content: center; }
+  .logo-tile img { width: 64px; height: 64px; object-fit: contain; }
+  .title small { display: block; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pill {
+    height: 40px; padding: 0 16px; border: 0; border-radius: 20px; background: var(--gold); color: var(--on-gold);
+    font-weight: 600; font-size: 15px; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .pill:active { background: var(--gold-2); }
+
+  /* Search */
+  .search { background: var(--paper); display: flex; align-items: center; gap: 10px; padding: 0 16px; height: 54px; position: sticky; z-index: 10; }
+  .search input { flex: 1; border: 0; outline: 0; font-size: 17px; color: var(--ink); background: transparent; height: 100%; }
+  .search input::placeholder { color: #9aa6c4; }
+
+  main { padding-bottom: calc(var(--safe-bottom) + 110px); }
+  .banner { margin: 14px 16px 4px; padding: 14px 16px; border-radius: 14px; background: var(--navy-2); border: 1px solid var(--line); display: flex; gap: 12px; align-items: center; }
+  .banner p { margin: 0; flex: 1; font-size: 15px; }
+  .banner .pill { flex: none; }
+
+  /* Member list */
+  .list { list-style: none; margin: 0; padding: 0; }
+  .row { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 16px; border-bottom: 1px solid var(--line); width: 100%; background: transparent; border-left: 0; border-right: 0; border-top: 0; color: var(--text); text-align: left; }
+  .row:active { background: var(--navy-2); }
+  .row .who { flex: 1; min-width: 0; }
+  .row .name { font-size: 19px; }
+  .row .sub { color: var(--muted); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .chev { color: var(--muted); }
+  .badge { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 10px; background: var(--gold); color: var(--on-gold); white-space: nowrap; }
+  .badge.gray { background: var(--navy-3); color: var(--muted); }
+  .you { font-size: 12px; color: var(--gold-2); font-weight: 700; margin-left: 6px; text-transform: uppercase; letter-spacing: .05em; }
+  .empty { color: var(--muted); padding: 28px 20px; text-align: center; }
+
+  /* Email list at the bottom */
+  .emails { margin: 26px 16px 0; padding: 16px; border-radius: 14px; background: var(--navy-2); border: 1px solid var(--line); }
+  .emails h3 { margin: 0 0 4px; font-size: 15px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .emails p.hint { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+  .emails a.mail { display: flex; justify-content: space-between; gap: 10px; padding: 11px 0; border-top: 1px solid var(--line); text-decoration: none; font-size: 15px; min-height: 44px; align-items: center; }
+  .emails a.mail span:last-child { color: var(--gold-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .btn-wide { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 50px; border-radius: 12px; border: 0; background: var(--gold); color: var(--on-gold); font-weight: 600; text-decoration: none; margin-top: 10px; font-size: 17px; }
+  .btn-wide.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+  .btn-wide.danger { background: transparent; border: 1px solid rgba(192,57,43,.6); color: #ff8a7d; }
+
+  /* Floating add button */
+  .fab {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--safe-bottom) + 14px); z-index: 30;
+    width: 68px; height: 68px; border-radius: 50%; border: 2px solid var(--gold); background: var(--navy-2); color: #fff;
+    display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 20px rgba(0,0,0,.45);
+  }
+  .fab:active { background: var(--gold); color: var(--on-gold); }
+
+  /* Member detail (white paper like a notes page) */
+  .paper { background: var(--paper); color: var(--ink); min-height: calc(100vh - 66px); }
+  .paper .head { padding: 20px 20px 14px; border-bottom: 1px solid #edf0f3; }
+  .paper h1 { margin: 0; font-size: 36px; font-weight: 500; color: #444; }
+  .paper .head a { color: #1e3c49; font-size: 15px; text-decoration: none; }
+  .label { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #9aa3ad; margin: 0 0 6px; }
+  .month { padding: 16px 20px 4px; }
+  .req { margin: 0 16px 14px; border: 1px solid #e6eaee; border-radius: 14px; overflow: hidden; }
+  .req .body { padding: 14px 16px 12px; }
+  .req .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .req .date { font-size: 13px; color: var(--ink-muted); }
+  .req .text { white-space: pre-line; font-size: 18px; color: #333; }
+  .req.answered .text { color: #7b8692; }
+  .status { font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 10px; background: #f6eddc; color: #7a5a22; }
+  .status.done { background: #e9eef6; color: #3d5a80; }
+  .actions { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--navy-2); }
+  .actions button { min-height: 58px; border: 0; background: transparent; color: #fff; font-size: 12px; letter-spacing: .05em; text-transform: uppercase; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-left: 1px solid var(--line); }
+  .actions button:first-child { border-left: 0; }
+  .actions button:active { background: var(--navy-3); }
+  .paper .emails { background: #f5f7f9; border-color: #e6eaee; margin-bottom: 0; }
+  .paper .emails h3, .paper .emails p.hint { color: var(--ink-muted); }
+  .paper .emails a.mail { border-top-color: #e6eaee; }
+  .paper .emails a.mail span:last-child { color: #1e3c49; }
+
+  /* Member page tabs and Balance Wheel profiles */
+  .seg { display: grid; grid-template-columns: 1fr 1fr; margin: 14px 16px 2px; background: #eef1f4; border-radius: 12px; padding: 4px; }
+  .seg button { min-height: 44px; border: 0; border-radius: 9px; background: transparent; font-weight: 700; color: #5b6875; font-size: 15px; }
+  .seg button.on { background: #1e3c49; color: #fff; }
+  .prof { margin: 14px 10px; border: 1px solid #e6eaee; border-radius: 16px; padding: 12px 4px 14px; }
+  .prof .ptop { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0 10px 2px; }
+  .prof h3 { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #1e3c49; }
+  .prof .ptop small { color: #8a96a2; font-size: 12px; }
+  .prof .edit-btn { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid #d7b883; background: #fff; color: #1e3c49; font-weight: 700; font-size: 14px; }
+  .radar { width: 100%; height: auto; display: block; }
+  .wins { margin: 2px 12px 0; padding-top: 10px; border-top: 1px solid #eef1f4; }
+  .wins p { margin: 0; white-space: pre-line; font-size: 15px; color: #333; }
+  .wins p.label { font-size: 12px; color: #9aa3ad; margin-bottom: 4px; }
+  .prof-empty { text-align: center; color: #6b7785; padding: 22px 14px 8px; font-size: 15px; }
+  .prof-empty .btn-wide { max-width: 320px; margin: 12px auto 0; }
+  .score-row { margin-top: 12px; }
+  .score-row .lab { display: flex; justify-content: space-between; font-size: 15px; }
+  .score-row .lab b { color: var(--gold); font-size: 17px; min-width: 24px; text-align: right; }
+  .score-row input[type=range] { width: 100%; height: 36px; margin: 2px 0 0; -webkit-appearance: none; appearance: none; background: transparent; }
+  .score-row input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--navy-3); }
+  .score-row input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 30px; height: 30px; border-radius: 50%; background: var(--gold); border: 3px solid #fff; margin-top: -12px; }
+  .score-row input[type=range]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--navy-3); }
+  .score-row input[type=range]::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: var(--gold); border: 3px solid #fff; }
+  .sheet .preview { background: #fff; border-radius: 14px; padding: 4px; margin: 10px 0 4px; }
+
+  /* Pray mode */
+  .pray-card { margin: 18px 16px; padding: 22px 20px; border-radius: 18px; background: var(--paper); color: var(--ink); }
+  .pray-card h2 { margin: 0 0 4px; font-size: 30px; font-weight: 600; color: #333; }
+  .pray-card .text { white-space: pre-line; font-size: 19px; margin: 14px 0 0; color: #333; }
+  .pray-card .small { color: var(--ink-muted); font-size: 13px; }
+  .pray-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px; }
+  .counter { text-align: center; color: var(--muted); font-size: 14px; margin-top: 12px; }
+
+  /* Admin pages */
+  .section { margin: 16px; padding: 16px; border-radius: 14px; background: var(--navy-2); border: 1px solid var(--line); }
+  .section h2 { margin: 0 0 6px; font-size: 18px; }
+  .section p { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
+  .field { display: block; margin: 12px 0 0; }
+  .field span { display: block; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+  .field input, .field select, .field textarea {
+    width: 100%; min-height: 50px; border-radius: 12px; border: 1px solid var(--line); background: var(--navy); color: var(--text);
+    padding: 12px 14px; font-size: 17px; outline: 0; -webkit-appearance: none; appearance: none;
+  }
+  .field textarea { min-height: 150px; resize: vertical; line-height: 1.45; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold-2); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mrow { padding: 12px 0; border-top: 1px solid var(--line); }
+  .mrow:first-of-type { border-top: 0; }
+  .mrow .top-line { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+  .mrow .email { color: var(--muted); font-size: 14px; word-break: break-all; }
+  .mrow .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip { min-height: 44px; padding: 0 14px; border-radius: 22px; border: 1px solid var(--line); background: var(--navy); color: var(--text); font-size: 15px; }
+  .chip.green { background: var(--gold); border-color: var(--gold); color: var(--on-gold); font-weight: 600; }
+  .chip:active { background: var(--navy-3); }
+  .linkbox { width: 100%; margin-top: 8px; min-height: 44px; border-radius: 10px; border: 1px solid var(--line); background: var(--navy); color: var(--muted); padding: 8px 10px; font-size: 13px; }
+  .steps { margin: 0; padding-left: 22px; color: var(--text); }
+  .steps li { margin: 0 0 8px; font-size: 16px; }
+
+  /* Drawer and sheets */
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; }
+  .scrim.on { opacity: 1; pointer-events: auto; }
+  .drawer { position: fixed; top: 0; bottom: 0; left: 0; width: min(82vw, 330px); background: var(--navy-2); z-index: 50; transform: translateX(-105%); transition: transform .25s ease; padding: calc(var(--safe-top) + 18px) 0 var(--safe-bottom); overflow-y: auto; }
+  .drawer.on { transform: none; }
+  .drawer .me { padding: 0 20px 16px; border-bottom: 1px solid var(--line); }
+  .drawer .me b { display: block; font-size: 19px; }
+  .drawer .me small { color: var(--muted); }
+  .drawer button { display: flex; width: 100%; align-items: center; gap: 14px; min-height: 56px; padding: 0 20px; border: 0; background: transparent; color: var(--text); font-size: 17px; text-align: left; }
+  .drawer button:active { background: var(--navy-3); }
+  .sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--navy-2); border-radius: 20px 20px 0 0; padding: 10px 18px calc(var(--safe-bottom) + 12px); max-height: 92vh; overflow-y: auto; transform: translateY(105%); transition: transform .25s ease; }
+  .sheet.on { transform: none; }
+  .sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--navy-3); margin: 0 auto 10px; }
+  .sheet h2 { margin: 4px 0 2px; font-size: 21px; }
+
+  .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--safe-bottom) + 96px); z-index: 60; background: #fff; color: var(--ink); padding: 12px 18px; border-radius: 24px; font-size: 15px; box-shadow: 0 6px 20px rgba(0,0,0,.35); max-width: 88vw; text-align: center; display: none; }
+  .toast.on { display: block; }
+  .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 70vh; color: var(--muted); text-align: center; padding: 24px; }
+  .spinner { width: 34px; height: 34px; border-radius: 50%; border: 3px solid var(--navy-3); border-top-color: var(--gold-2); animation: spin 0.9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (min-width: 760px) {
+    main, .top, .search { max-width: 720px; margin-left: auto; margin-right: auto; }
+    .paper { border-radius: 0 0 16px 16px; }
+  }
+
+  .demo-bar { background: #d7b883; color: #10262f; font-size: 13px; padding: 6px 12px 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .demo-bar b { font-weight: 800; letter-spacing: .03em; white-space: nowrap; }
+  .demo-bar b { flex: 1; }
+  .demo-bar label { order: 3; flex: 1 1 100%; display: flex; align-items: center; gap: 8px; min-width: 0; font-weight: 600; white-space: nowrap; }
+  .demo-bar select { flex: 1; min-width: 0; min-height: 40px; border-radius: 10px; border: 1px solid rgba(16,38,47,.35); background: #fff8ec; color: #10262f; font-size: 15px; padding: 0 8px; }
+  .demo-bar button { min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid rgba(16,38,47,.5); background: transparent; color: #10262f; font-weight: 700; font-size: 14px; }
+</style>
+</head>
+<body data-token="" data-app-name="C12 Prayer">
+  <div id="gate" role="dialog" aria-modal="true" aria-label="Enter passcode">
+    <form class="box" id="gate-form" autocomplete="off">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAmQklEQVR42u2deXhV1dX/19r7DHe+mYAAKgqCzCqo1Iq+ttpqFRWV6lt/+jprW7WjYlvHtw61Tq/WWlt9RTrYt9W2OIGCA1SZw0wIhClMMmS887ln2Hv9/jhJvEkw9wqEJHjWE59Hk3hz7zmfs9Z3rb322khE4Jln+zPmXQLPPDg88+DwzIPDMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMg8MzDw7PPDg888yDwzMPDs88ODzz4PDMg8MzDw7PPDg88+DwzIPDsy+NKd4l6MyICAgBAbH1G1ZyX7a20swk+46dDASA4P5z5Bl68zk+BwpCxNa7Lh3LTuzMNtQY9ZvsdK1P40GfZhaPLx56DpFEZJ7n+PIYIiIAOEbMiW9P120xG2s0NHRNUWzHIcpkHcsizViUigwI9RtxpPLhwdHeZwjHcTL1ZmNNtnGLHd8V1IADMGmnLJHOOgAEgAhkOw5nPLlxph7qowbLoCXAeGGl15skklIiIme5TzwBgJ1N1Vf8IeqTGcM2LduRrichoP28SMivO1px+Wm3AONHHhxfomyFiISUQkoAYIgK55yxts8GEpHqC0dPmJRIZU1bOEQIhLAfMtwXSWdtv4zXrpkBgEB0hD1pR77nkFK6nzDXSazbuu1f8+YbWfPR79/oXgFsyUeACBDjNQto98eJtAmQ9/pgNOyj8olFx008wsSHcqQ6CUlERAwZa2EiZWTnr1rz1ieLV2zYsHrTVskUQAwH/D+/7ipHCIXzVjEKQNHjztgX3xll22LJLHbKBxEkMxbfNleNDAiWDnbZ8jxHz2XiszsNULN779zlq+YuWzl/TeXuukbgHKQEKRTGAcAB+Oej900683QhZatrISJEIGHvq5im2A1pw87DB4CmMFKDfcffoARKjhhx2uvhcAO9JMkYYy2PrO04y9ZvXFG96d2FSxetqUrZFhCAlAjEkUkSBEhEjCEglhYVzXn2sZHHDcrlw73B2cS+xuXTQFq2lNjpdZKA0aBmqX3Lxl/HOffg6G4mAIgoV0mkMsay9dUfVKyYtXDpuq3bgHMgAClcN0IILfLjM+OIgvHxw4bMe+EpRVEwR3y4AiK1e01289tZy5GS8ukPjAR1J3JC2ZjLjgzx0cvgcANHO3W5edfuZVXVMxcuXrRm/c76ekAEKUFKhXEiKd0ieCeyi3GHsSlnnf7qQ/cIKRliOz4aN32k1C9tyic+AACRhQOaGHhu6bGnAkno5Xz0DjjcjAMRWwOHI8SGbTtnL6mYuWDxksoNjhvlheRAiEySkF/kY7l8PHPHzd+bckkbcQpEBIhYt/IvqrEznjLzilNF4YyxkvE36JEBvd1/9Fw43MAhpeSMtT7KsWSqoqr67fmLPlldWV2zXTAOJEEIjvh5gaOgq4DIEBlX3nvm0YknjWkrPgAAhJ2pW/K/TMQzptP53ZYAAU21eaB8wq1cDVBukuzB0RUZx469tR9UrHj7kwVLKzfUJ1LAOUgBUrpM5A0chRhDkMiO6ddvwYvP9C0pklKyz5IXicjM+O6G5S8TkGOLzm+3BCwK6pbvqD7jrm5ZskUPjoMJHCSpTT07a1nrtm5/Z/7iectXrdtaE8+arrpEAI5MgiA6xG/eFadnjhk585lHFc5zxYdbvUjsqLC3z8lkHSKZ5+MAFoV0p/SUshO+0XvFRzfD0VrMbr0NjYnk/NWVHyxdPnf5yi07PhVcAZIgJW9x2l36hl3x8YPLJz3xg++2FR9AJBB5/fqZamxNLGnmE6eIiKGAqg6eFOo/tpdWProBjv1mHNXbdy5cs27+6sr3ly7bF0sAMjdwFJhxHGI+EH8/9Y7rJ53fjg8gIpD7lk7zOXWxtMU65UMSaKrCFT089upA0YDeyMfhg0NKIqDcjIOIlq/fuLBy/dsfL1i0tsqm5t9rzji6IHAUdEUAkWNA97/7zCOnjRohhOA5yQsAOkasfvkrYCdN28FO77cECOoqqdGyU29iqs+DI3/Gsa8xtnzDxrnLVs5esqx6+05wA0dLxnE4nUTn4nRgWVnFK8+XFkUkEWsrPjINNal1/2fbwnGczsUpAUZDuukb1G/cVUQyt+PwywuHKzBzffLW3XsWrl43Y978+avXxtIGMOaucfQcJjoGl2+eevKMXz+IjHWsjDVtnc/3zY8ls4Us20ZCOpVPLB58Zu+qfHSt50hns5t2fPrO/EUfVqxcvXFL2rYBAKRgSAy4bNajPdQUxh3Gb7v0gqd/9L0O4lQisoa1/1JTG5sSWcTOK2PIFaZy9A//dqR8eC9atu0qOFZWb/rDm7PmLV9Zs2sPKOrhzDgOJR9ccUj+/aF7Jp89sV1ljEiSFPXLpit2XTJj5V221TUVVX/RidfqoV7TU9hVLu6Vd2a/8t5HNZ/uBQBFSi4lAggi0avapYQUCHDLr57ZsG0nZ0y2feeMq9FRl1mgayrPk9cCZC1HJbNx7T9I2NBLrkBXwRHw6YqUKueI6EghemcLHREhyXgmc/3Dj8fTGQCQLYEQkQGRHioNDDlf5Yzl6yFlQMm0GcJYw/qZgCxvGe1IhkNKcqRwqYDebJJAAVixqebWR59miJQbExGJZKT/KGXgWWG/ml+XIjQlsyy2Lr5tAfYGPrztkPnNkUKRcsYni379p//rEFyQSEYHT7SDg6MhPS8fJMmwhLFtbqZxe8/nw4OjMPFBkpO8/6U/f1ixgjMmPgsublUPS0dfkpXBgK7KTpUpIjiOICmT6/8ljCY3Nnlw9G4jIiLJkP7rwcc27fyUMyZzsnAiyRRfdOwVAlVNVTvPzxHAcqQORmPV20I4gNBj+fDg+ALiAyXVJ9PXPPCYaVm5VQA3QPgj5aGh3/KpjPE8VxWB4ilTt3bHNs0BQAIPjiMhuJBCtHJLze1PPMcY5pbwEBmQDPUfK0vHF4V0ylfGQIR4ymT1q5Kfruqx4sOD40DE6Z9mfzT9ndkK521LvAhEZSPOz6oDokFN5uNDSpkxnfTGWWZ8d8/kw4PjQMQpI/mjZ343f3VlrjhtKYpT0ciLM1L3a1zmcx6OcBiKxrWv22YaEXua+PDgOBBxCiQN07rul4/XNcUYoszhg4i0QFHR6CsIUFV457cbATOW8GMmVvWGW0PrUWUhD44DFKecaGdd/Xfue6Sl2tFGnAaKj/Yf9w2/xhljeSunibSpGTsaqj9wd2J6cBwZ4hQ+Wbv+nhde7ihOiWR00ARRclI0pBVwtymRtrBuaWrPWkTWc/jw4DhYcfrU32ZMe+tdhXNHiNx4QSTLhp9v8D7hoCYpnzgFadoitWlmNlnrVl09OI4EccqJpj7/UuWWmjbJC7q1U1465nKbdJ/G8izbEli2UFE0rZtBwuohW108OA5WnBKJZMa49O4HapvibcQpIJBU/MWR4ZO5oihcySdOKWnYPtFQV/kmQI8QHx4ch0ac7qhrvP2JZxFR5jYnuJXTsiHKwDPDARUZ5rsZlExbenpzrGZ+TwguHhyHRpxy4by5YOnD0/7SrjLmVk6LB59pBYdGg3reyhgRJA3b3D43XbsRkZEUHhy9338AcCkenf7XmfMXt6+cIgOg0lEXpSES9CnU6TVHJCGEJEpsfMs2Ysh4N8YXD45DJj4kSUl0/cNPbti2o8OyLSHXysZMERJVhXWeuyCAZUuVzIY1/yBheXAcGXwAI4qnMzc+8mQslc7tGXOrF1q4X2DYxZwBQ9b5yhwCpQ07RA0N62cBdNuyiwfHIRYfCtCyjVt/+NRz7rJLTjkcgWRkwBhtwFeKQr68L4VAjcksNlU11SzsrspYz4UDW4oFmLvbvYv/1sG/lCOlIuXfPvzkyT//vYP4QAAqHnZuRj+mIHEqZdZ27J3zUg3b3SXfLzsciMg5d1s1bcdxHGE7whGi9fudX1GGyDlnOdbJLW/95ea/1fxXWLvJLV/cf0hG4p4X/zh32aq2fCAREEHZ6MkWhoK6kn/Z1nFIOPF1/5R2Bg77si3rSViAwrntOEY8YSSTmqoMKCvpWxLtX1pUHAqapmXEE0YqRW235zfzxJi7Iy1rmkY8nk2ns+mM++U4Yr+ugjOWNU0jnsimM6qi9C8rKYtGbdsx4kkjlQIAdqCIEBEQIdCNjzz5aW19bk+ySypX/UWjp0hihSzbGrYMcLN+7b9alMfh46OnDKlljAkhzES8/8D+51044ZxTxw07+qiyoqgkQgTTsnbXNqys3jR35Zq5y5Yb6bQvGKSWcpMQwjRNcIQvHBozdMg3Jpw68cRRwUDAcURA1x6e9uePFi/TA/7W9IExlJKMZGrk0OOvPP/rE0aNiIZCfYqLLMfeV9+4fuuOd5csfXfBIsuy/D7fge3YlAQc6NOGput/+cTs3z7WnLAgtvBBWqR/cNiF1taZadE8GLGTylgibRazXU3Vc0qGn08kD1txvau2Q0597sVnX3+DSykKeH3OmZExAgH/D6+YcuPkC4Yc1V8S2I5wpHBnHLhOReXMcsSaTVt/9ce/zpj9IfPpCuckZcCnjx854msnn3jeGacd27+8LBoWEghIEmmcXX3/o6++9a4/HGoeFMOYZVkKZw9/96YbLrmwNBpyBAkpHSkRQOFcVZiU8MnK1T964rnVGzf5QgEpDjBZcHdjf3fyBc/+5Lb97ratX/eWlqgqYDc2ImLQr7JB5xcdPe6wjQrqfs/BOTNSmaHHHvPyA3efeeLodNaqjyddcehmg65adP+dIY4ZOvhvj9z30qnjfvHbFzNmliH768P3f+urp0oA2xFZs/l/BwBJFNR1AMSWAIHIbNMqLYq+8sDdF54xIZE23F8mIiBABLf+jQBnjTtx1m8fv+jHP1+xvtrn98sD8h+OFBzx92/MOnnY8ddNOi+XD/ePlo26aF9FLBzcFc8zCoaEJMNy2Ob3AtH+WqT/4dlty7o9mhgZY+TxQ+Y8/9QZY0fXxRKWbbtXEBH9uh4NBYN+vzs+xRWY6YwRS6a/f/lFL91zp3SEZZppw3Ak1TXGk+mM4ziubm3+ynlYEYCkUBi9/MDdF54xobYpIWTz3OOg318cDQf9fgBUOOecN8QT/UqK/3DPXdFgQAhxwJ5cAnCSP/3NHxauWddOnLpBpnjUxYaj+rU8u20ZgiOkymVj5T8dyzg8+7C7Ew5EFI7Tr6Tkr4/ed1TfPg3xhKYoACAlFYVDPk3btXff4rXrqnfstB2nOBLy67qQEgB1TamPJ155+z1knGzno+WrQErOWdDvj4ZDnO1/fRyRWVnzuV9MveiMCXsbYrqmSiKfqmqqumXX7jfnfVK9fWco4HNvmqooTYnUKcOPv/Tcs+105mDEKZFMGdmbHn26IRZniDlhFgFICxSVjL6MMc55PnFKlMo6OiWaKv/ZXHTr4uSlO8MKMnTS5uP33nXi8cfVxZKaqkhJjLGgT39j7ifPv/7Gqo2bs5alct6/tPSSs8+49qLzTzjmmEQ6HfT5b37oyXc/nBssLXUce9n6amQ84PNt3L5zx77ak4YOLo5EbMdpThw+G55BnPOFq1ZfcubpxdFwPJmOhoK76+vv/J/fvb9kWSqbDWra7d+Zcu8N11iOg+7bk3TRxNP/+Oa7B6PMJIGCsGXP3u/c+/B7v3mcQDJorakgkfSVDskOOkf79KN4WnZ+vxlQIm0Vs10NGz8sHXYOkOxSF8K6MaBk05n/OP20K77xtcZkWlW4JGKMIcAPnnzu2z/5xdyly5KZjJDSsKzqnTsff+mPZ1z3vVfemhUNB+9+/sXX3psTKCl2HEdRtQ3btn/vsafPvf2nZ95yx2V33lvbGFMVpfUUFSmo5SaRqmvT//HmBXfcVb1tR9/iSM2ney64Y+q/3nvfdBxd0ywpf/27/505f1Ek6BdCIoAQ8qi+fXSfJqQ8mJvgSKFI+vfa9ff9/uU2DestlfWiQROs8AmRYP4NLwAUT5mwb3Fqb2VX79bvVs0h6eZLLtRU1ZV7UlLI739o2p9fmP6qPxr2BwKccwRgiD5NCxRFk1nz5keePP/2qc/+9XU14BdCEgBjmDWtl16bsWjl6kzWDIeDuUqeiBjHnD9IgaKi5VUbzrvjrr/NmXf9fz+2YdPmYHExAkgpVYWjqqzYsInnKAyVc8YOwVUSJBUpn/zbjGlvt+8pdONLyciLs0qfcCDPhhcEkCQtWySqZ2aTdV1aWe8eOBDRsu2BA8q/OnZUJmu6a5ihgL9i/YZn//J3X1mJENJdmHArAJLIEUJRFF3X3l+4hHOOOdECEf3hkN8f4IwpmGczoiOEPxisbYp9557/Xrp+gy8SsR2HmkkCKWRJJJz7PtNZUwhx8L6biARJBvKuZ1+s3r5D4bxNBkTAuVI2+nJTagEt/ygY05E6dxJVM6RjHWmegyFK0xp+3KABfUotx0FEItAV/uqs9+1sliHbb4x3q17+YKDjT4WUkqR7ilvuD3PDSu4vq4ri03VVUT6rjCE6jhMtKfnWVycYloMMiUhVWGXNDjNtfJ7I/cKVUylTpvn/7n90b0NTcwrd8kZJSiVQHB1xMXKdc8y7oSGVtv3U2FD1TtfJju4LKyTLS0pVhbsXiHOWSBtL1m0AVeu8qNB5ybJdcahdWMn9fm4/HyIiY1Y8cf8t1406/thMNssQAVAIeH/x0kM4300SqAhrd+z+46w5iG03NDBGJAJ9honAgKBPy3vHEakxmcVYVXzzR0cWHAhAMHhguRs2iEjlvD4W31vfyJSDekYR2txKRIR82wIYY0BkxBM/uOG/7rhicjyZ4Yw5QhRFQh+vWPnOv+drgcChGnvIEW2A0084/uaLv9XuJCEiicgTu9fw9M6UYRWUphIQgJVuPNJSWURss8KKaDtOxsziwTlJKb9Y8s85My1bBXz2F3feNuXihJEFBEeIgN9XH4v98InnHCE0VT2wkzo6UAgSMOL3v3zvnSXRiJSUcwUIkZnJWmPzu9KxpaC83koCFod9hlLed8xlR5bnIGAIu+sa3ePiEdERTnlpyaAB/aRzUOoPGeSq97Z1jg5PBudG2igOBP7+xC9/cOXkeNpAACFEKOA3DPM/f/Zg5ebNuu8Aa+cdHwYERgDT779ryFEDhJStZBARAAo707jun4xsM99UZLfw6le5IX1lYy49JMlUz9IcAnDnvn2O07zG6DgyGgqMHnws2Xbnn5bla+lod0s6CtJWMjLxxEnDh8554X8umnh6fTzJGDpCFIXD++obL5t6z7wly/2hkDhE/d8cmWD8nmuvuvCMrzhC5J5E6Urthso3g+Qe9pO/Q11VOONKdORlii/adXXS7oFDEqGq1OzZG0ulFM7d4+FNW9x62SVawCfk/lelm5swDKOT449IQq56368gdfs/MrHEpK+fNef5p0YPOa4xkXRrU2XR8JK1VWff+qOPl64MRMJCHBoy3OXZK84+4/6brulwDBQhsqatn+jGtkKOkXOla8in6sd+3V98DJHsunnI3QMHEem6Xr25ZsGqyqBPc49FShnGaSNPuObC882mmKpwlvOZ3QYtAsim0meNP1nhXAjB9ndRGMtzrRhjJKWZTt9xzZX/ePwhn64nMxmGyBCLI6E//PPt8277yfa9e/3hkHOIyGAIDsAJRw/8zZ13uAvL7caoZ+o3m9s/Thl2IdWs5jNKIyMix0yALp6k3m1hBQFAyr/M/gBbqhoMMZ3NPv3j2yZfcF6qtt60bUBkDBmikNJIpa2s+cNrrpzz2yee/tH3pWW1ts+0FTPQSZ2DMZY1TYb4/L1Tf3PXHYZp2o7DEEOBgK5pP37q+e8++qRD5Pf7SErG0P06OBGKhKw4HHrtkXuLwyFqey46InOMWLxqBoDbCkn5pBqG/GoKi0tHXOh+vC69R92WrQgp9VBwxvtzZ17wzUlnfqUhllQVLiRpCp/+4M9+M3zoqzPnbNu7N2tZyFhRKPiVU8f/8Kop5542PpHO3HrZJAl0+yNPKrqOba9ou6WG3LDCGJrZ7KAB5dMf+MXZ48Y0JFJuf6mqKOu21nz3kaeWLl4KkYhpWpBtWeIgAARV09xIhIhSStkCZd7VOERkwByA5++8ffixx7QPKAjCsevWvKYzO+FQ3seUEFSGlmB9x01hXD0MLR3duiqLAAg/efq340cMKwqFDTOrKNxyHI54341X33zppE3bd+5paFIVNnLwcYPK+3HOY8kUQ6yPJ7932UW6ot72qyeJKbm+ol1Yaa1zIKJt2v1LS2c9++vhg46pjyfdrhH3BsdTmVsuv/hn11/tCNGa7BAB5yydMe76ze8bEgkrY4DjgE/XNE0I0bGVdb8i1GHsZ1ddfvnXz9pvJ1hj1TtB2diUyXPok+szOCIyDA6frAbLAORh8PrdCYeUpPv9m7dtv/WRp1577EG/z5c2sqrCJUBDPBn0+SaMHaUwRgCmZRumKYk4Y0I0P3+WbcsO5YDPq3MgouM4pSXFgwcObEqmcjuybMf56tiRZ48bI9ougBORwjCeMh54aXptQ+OU884tLy3asa9u8doqXVWLQqHKrVs1Tfs8/8ERHcTzTzn5wVuu73jiAiKLbV+qJjfE0mZBIhQgEtKpz4RI+YgvS5ugEMIfDr0z9+NvT73/+Z//ZFB5n6ZUxhWbtuNYjuNet5ZRbCSkjISCjnDueWHaYy9OV/y+diwgAymlkFJICYi5ngAQHcfJGNmONfh4KtPxHhORovB4Kk2SwLH7FEdPGja0NFo0ZuiQsM+3p6F+7boqpuv7bZJlCALZoL6l0+6/ExGQ2p+Cnm2ssXd8YFkOUWH1rpCe9Q/pO+RrQHTYzprs/h5SIaQ/Ep758YI1m7f88ns3TDnna8WhgOVI07ZFy1x9zrmmKrqqOI5cvGbdAy9Nnzt/kS8S7ngUAyKGgsGAriqcAaLGGUfeChDnrDgSLLDcKYlUzjgyxhhIuXrTFoaoasrNF08SUrzyznvA+X6Dvrs/KuTzTbtvamk02tZtECKzsommyhlcSluIvHqXEIO6ksVI2aiLDoMI7VlwtPiP4K76hhse+NXzr795xTe/NmHkiKFHHxUKBhgCABqmuXnHzrVbt709b8EbHy8QtuUvioj9NYXbjjN/9ZpdtbVZ0wREn6rVxZuQcyJChmkjO3vxMioMDgLinKUzWdOyUFEyhlHbFNvX2PR4/G8Z00ymM9zn2y9nDEAg+9X3b5h44uh2ZAAASdG45jUVjZTlsPyAgqZwW7KikZdxxXeYTwHrEVsTch+4rGGAZSvBwDHl/YL+5o5O03Y+ra1NNcWBMS3gb9dM1c4s0wTZKh+I6zrnzYJPEjnZ7BdJtwkAVZ+OjAkhhJCISEK4J+GqirL/ehfDWy4677k7f9Dh5FEJyGqrZgUSaxoShdS7EBgGNMU/bHKwfNThP/+rp2xqgpZ2DZ/fzwIBIcXW3XvALUMRAGeqovijYSBo1hOfbz6/r7UVyO2bauWTIfqCwS8unCUQKS2b6lBT3OXQjs+VK0Injh757E/vkG0XXV2tkN67ljeubDIcLMh1QUlQzxaPC5aP6pZjrXsQHK13wr3zuqqipjY7AHf2VmGbi6TsbAPZAa+iETTX1z7PFTIEAVheFJl+313M3f/SNqs2YrsT69+SJKSUhYjQopCe0Y/qM+xcINkthwb2ODjaOhIA6B0HPbkxUWH8jw/cfXR53zZSgwgQpGMm1/+LMzJNh+W70QQQ0LghfWUjL2EMiaBb5gt68zkO2XUUiL++/aazx5/UXoQiAGD92jc1mSxw0VVRuIO8eMyVqi+831WCL7vn6EWmMOYwfvlZp9/+7cnta+REgCy28UO/ua0xbbICHCFjGNRV5djzfNEB3XtIsQfHQfsMBAfwtGHH//5nPxZStgkZRIAssbsy++kCW1AhiyEEGAnqIjKqaOA46O7jq72wcnCXjwEhCwd80x+cGgkGENpUQgHRTtVlNr0tJEmSeRddJWAkqFlaedHISdQd6YkHx6EUoQwVRJx2z51DBrqdfyz3pySd+rWvKSgcAfnAAALwazwrtNJRl3HGsAccWe3BceDGkTmId1/znxef9dXczj8At3UA69e9FaBEynAQZD4RigpXOefhEZdyf7RL+7s8zXEYyEAHccpZpz948391EKESkMVqFmqpjfG0ybCARVeESFBx+p0Z6jOk26WGB8fBilDB2NCjyn879Yet42VyyUjXbbZ2zrNtQTL/oisRRMO6ERja97gzoAdIDS+sHJTUQORBXf/T/XcXh0PucIDc9MTJxhMb3pDCcUQhmwwwHNQNLC4bdfHhXI734OiagMK4AHj+zjvGDR/WRmq4h79JUb/mHz60slb+qQ0EoKvMIl/pmMsZVwF71if14PiCYZhxB/Guqy7/znlfz110dbefILLG6tkBUZdIW3mlBhEyxhljwWGTtFAfIIIeRoenOb6oCIWzxox44OZrpaR2208AWXzHMtawMm44BaYaRUFN9P1KuN+wHiU1PM/xxa8UA4E4oLT4rw/d43ZytNtkYDRsM2vez1hCSpl3vVACFoV9Wf+goiFnUxdPb/Lg6HoRCsynatPvn9qnuCh3p6vbg2NnE01VMxCEU9BOV3I7/0pHXwptumQ9OHpp7ors6R999z9OPjG3qtHa79O07q0gz6YLW3TVFEUQFI28hCk+IkDsoXfBg6MgESqQ33jBN268+FvtKqEIBIj1G2b7rF2xVIGLrkxTWHj4ZD06kKTEHukzPEFaqM9wECYMH/rcXXfI/W0/Se1Zi3XL4lmnkO0nBFgU0q3omGD5aCKJrEc/nF022oEhR+yxDrNwMiSw8mjkD7/4MeccoP0eaCOxL7lxlmk5EvJ3H0rCaFAztKPKRlwARAjY0z9+F71u2sgKxt3h3wrjPdl5diZCkSmcT7t/6ohjBwkh226qRhJmct3rCtiWEHnXTyRAQOcZ8hePuqRZfuKXFY5vTjjl7LEjgz6fYNxhSIAMgSOy3gMJRyaQPXTLteecOk5IyVtGWLqd54hQt/YNjZIZ0y5w3AowXjLyUs0XPvybDA7w8aCunJ/9aW39J6vXzl226t1FS/Y1JYAxkBKkcKfAygI2qnejCHUYm3LW6a8+dM9+F12bNn6oNFQ0FjZuBRDDAZ0d843o0adQj1l07TY4pCT3hAr3P2PJ1OJ1G+avWjt3+YplVZtA4UAAUrjFZ0I4JBPZDp3PQIHs5KHHzX7u8UggANB+p2uqtjpd9ZrlUCGHAhNgcdhnR0aUjrrk8ByF0Ts8hzs11h1u0fqd1Zu2zlux+qOKFUvXrW/KZN1nEYk4MkmCuvgtFSI1ADEU8P/7hadHDT5WErHPyCBEtI1Y4/KXyU6bdv7ZdhIw4ldtvbzvKddBb1Poh+lOuENhoe1Mi121dR8tW/X+kmVL1lVv37cPGO/2oIOInHECePWXP7/07Ikd53eRcGqXT+dmbSpjsQJm/vlULtDX7yu3Nk9261XC/HA/pu5OJSklQ2xtg0gb2Yqq6tmLK/69cnXl5hqTmueQH/6g40qNn1/97Qdvvna/41YaKt9QkxsKmexGhIrCOOfhkVOCfU/odWR0AxxtdYmk5jbdz65a9fad7y6q+KBieUXlhpiRBQQQEuFwBB13D/RFp5/6+q8ecH1GO6kRq1nI9n4cS5pQQFWDAKNBnfqfWTx4Ys9cdO3RcLQLOu6459b7UdsUm7N42QcVK/69cvXu+sbWoKMwTiQPedBhDCSw4wb2//iFp/sURQmAYZultUzDtlTlq7YjC1laI8KSqN/Qj+178pXQ3C2MHhyHIM0haDOPMZHOVG6peW9RxXuLK9ZtqXGQHfKgg4jI0K/5PvrdEycNO77DUA10srH65dPBSpq2U4AIpaCuC7207ynXMa53MjXVg+OQZTpCyo3bd85bsebdhUsWVa5LGBYggDwEmY7b3/X8T2+76ZIL2g/VABJS1i2b7rNr4wXM7yIETVG4qkdPvF4P9+lduWuvgaPzTGf7nn2LKqvmr1o7Z8mK7ftqm4/yPqBMhyMKrvz0ysmPfv+m/U52q6t8S41XxtNWIeNWkGHAp6rHTYoMHNuL6l29FY42mQ6BpDaZTjKdWVK1Yd7y1f9evmrlxi02AJAEKVuCDnU+j4MjCsa+Omr4e8/+WuGu5sHcgBLbuYLtmhNLZaGAeRAEUBzxi5JTi4ed09vJ6GVwdMx02rmTqprtsxdXfFixcsWGjQ2pTG7Q2a+GZQgS2cCysoX/+2x5aYlss5+RANBK7G1Y/rIk4diykPHCRSHd9A3qO+6qlkPF0YOjxwWdhnjiw4qVH1SsWLC6cvOuT4ErQBKEdIcZy5ZaJ0NExmc9/ch/jG/f34WIVjZdv2KaasfTpl3AeGHm15hQon1OvUnR/N01bsWDo7NMR1Kb+oQjREVV9VsfL1y4tnLl+k2m+1ml4ABc4ZaE3/30thvbiVBqburct/JVn7GjqZD+LgTOOQOMnnxdoPjobhy34sFxgO6kZveeWQuWzlywaOWmrY2JFCjq9d88+/c//7Hb+dduP2Pjprm8bkk8lS1o7hQyv674hkwKDzyxV6cnXwo4Oqdkd31DRVX1sqrqe2/4f5qqQodF1/TeSmPjG4YlpCxk1xoWh3128Ymlw791BIjQLxEcbTMdcpdYP/8kKAJAI743tupPJCzbyd8WSoDhgOb4yvuOvxaQHTE+o7n8A18Oc6f9sZxMp1213iWDSCTWv1MUxIyBCuOGKQABgICwY7YiAfwaNyFQOmoKIC9kirnnOXq3ixHZhBnfZTVsMZq2U7YxGNAt2zFNR1DzzFtsnoyKXAGF86KxV/tKjuulS2seHAeKiXSy8T1WQ7XVVGPEdkeDmiTKmo5lC3dLQTSoi/5nlvSwoRoeHF0ORrtRGXa6wWissRqrrdhuJg2GzO9TjMDwvmMnH2Ei1IPjC6hYhDZnoDvZpB3fGd+9Bq10yclXqZr/SBZqHhyefZ55e2U98+DwzIPDMw8Ozzw4PPPg8MyDwzMPDs88ODzz4PDMg8Mzzzw4PPPg8MyDwzMPDs88ODzz4PDMg8MzDw7PPDg88+DwzDMPDs88ODzz4PDMg8MzDw7PPDg88+DwzIPDMw8Oz7489v8BeMe9at8/90AAAAAASUVORK5CYII=" alt="C12">
+      <h1>C12 Prayer</h1>
+      <p>Demo with sample data. Enter the passcode to continue.</p>
+      <input id="gate-code" type="password" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Passcode" aria-label="Passcode">
+      <button type="submit">Open the demo</button>
+      <div class="err" id="gate-err" aria-live="polite"></div>
+    </form>
+  </div>
+  <script>
+    (function () {
+      var KEY = 'c12-prayer-demo-unlock', SALT = '41252f6cc24ea8f1dd0fb36faf0036f3', HASH = '746ccf16c9c99dc39916db45bfff9a5a9ad195a63fc4c1916680f952455d4cd3';
+      function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+      document.getElementById('gate-form').addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        var err = document.getElementById('gate-err');
+        var val = document.getElementById('gate-code').value.trim();
+        if (!window.crypto || !crypto.subtle) { err.textContent = 'Please open this page over https.'; return; }
+        crypto.subtle.digest('SHA-256', new TextEncoder().encode(SALT + ':' + val)).then(function (d) {
+          if (hex(d) === HASH) {
+            try { localStorage.setItem(KEY, HASH); } catch (e) {}
+            document.documentElement.className += ' unlocked';
+          } else {
+            err.textContent = 'That passcode did not work. Please try again.';
+          }
+        });
+      });
+    })();
+  </script>
+  <div class="demo-bar" id="demo-bar">
+    <b>Demo with sample data</b>
+    <label>Viewing as <select id="demo-persona" aria-label="Demo: viewing as"></select></label>
+    <button type="button" id="demo-reset">Reset demo</button>
+  </div>
+  <script>
+    (function () {
+      var sel = document.getElementById('demo-persona');
+      window.DEMO_PERSONAS.forEach(function (p) {
+        var o = document.createElement('option');
+        o.value = p.name; o.textContent = p.name + ', ' + p.label;
+        if (p.name === window.DEMO_PERSONA) o.selected = true;
+        sel.appendChild(o);
+      });
+      sel.addEventListener('change', function () { window.demoSetPersona(sel.value); });
+      document.getElementById('demo-reset').addEventListener('click', function () {
+        if (confirm('Reset the demo? This erases any changes and restores the sample data.')) window.demoReset();
+      });
+    })();
+  </script>
+  <header class="top" id="top"></header>
+  <main id="main"><div class="loading"><div class="spinner"></div>Loading prayers...</div></main>
+  <button class="fab" id="fab" aria-label="Add a prayer request" style="display:none">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  </button>
+  <div class="scrim" id="scrim"></div>
+  <nav class="drawer" id="drawer"></nav>
+  <section class="sheet" id="sheet" role="dialog" aria-modal="true"></section>
+  <div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  // The C12 logo, embedded so Apps Script needs no image hosting. To swap it, see tools/make-logo.py in the README.
+  /* LOGO-START */ var LOGO_SRC = 'data:image/png;base64,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'; /* LOGO-END */
+  var TOKEN = window.__TOKEN || '';
+  var APP = document.body.getAttribute('data-app-name') || 'C12 Prayer';
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var S = { data: null, view: 'home', memberId: null, boardId: null, q: '', prayIndex: 0, busy: false };
+
+  var ICON = {
+    menu: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
+    up: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
+    back: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+    search: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1e3c49" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+    chev: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>',
+    check: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4aa3ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>',
+    undo: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9fb2c6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h11a5 5 0 010 10h-3"/></svg>',
+    edit: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e1c495" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>',
+    x: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e05a4f" stroke-width="2.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+  };
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function h(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function monthLabel(k) { var m = /^(\d{4})-(\d{2})$/.exec(k || ''); return m ? MONTHS[+m[2] - 1] + ' ' + m[1] : (k || ''); }
+  function monthName(k) { var m = /^(\d{4})-(\d{2})$/.exec(k || ''); return m ? MONTHS[+m[2] - 1] : ''; }
+  function fmtDate(iso) { if (!iso) return ''; var d = new Date(iso); if (isNaN(d)) return ''; return ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + '/' + d.getFullYear(); }
+  function hourLabel(hr) { var a = hr < 12 ? 'AM' : 'PM'; var x = hr % 12 || 12; return x + ':00 ' + a; }
+  function ordinal(n) { var s = ['th','st','nd','rd'], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.remove('on'); }, 2600); }
+  function D() { return S.data; }
+  function member(id) { return (D().members || []).filter(function (m) { return m.id === id; })[0]; }
+  function reqsFor(id) { return D().requests.filter(function (r) { return r.memberId === id; }).sort(function (a, b) { return (b.month || '').localeCompare(a.month || '') || (b.createdAt || '').localeCompare(a.createdAt || ''); }); }
+  function openFor(id) { return reqsFor(id).filter(function (r) { return r.status !== 'Answered'; }); }
+  function profileFor(memberId, month) { return (D().profiles || []).filter(function (p) { return p.memberId === memberId && p.month === month; })[0]; }
+  function canEditProfile(memberId, month) { return month === D().month ? canEdit(memberId) : (month === D().prevMonth && D().canManage); }
+
+  /* Radar chart for the 8 Balance Wheel areas, drawn as inline SVG. */
+  function radar(scores, labels, small) {
+    var W = 392, H = 336, cx = 196, cy = 168, R = small ? 112 : 108, n = labels.length, out = [];
+    function pt(i, r) { var a = (-90 + i * 360 / n) * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+    function poly(r) { var p = []; for (var i = 0; i < n; i++) p.push(pt(i, r).map(function (v) { return v.toFixed(1); }).join(',')); return p.join(' '); }
+    out.push('<svg class="radar" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Balance Wheel chart">');
+    out.push('<polygon points="' + poly(R) + '" fill="#f6f8fa"/>');
+    for (var k = 1; k <= 10; k++) out.push('<polygon points="' + poly(R * k / 10) + '" fill="none" stroke="' + (k % 5 ? '#e1e6eb' : '#b9c4cd') + '" stroke-width="' + (k % 5 ? 0.8 : 1.3) + '"/>');
+    for (var i = 0; i < n; i++) { var e = pt(i, R); out.push('<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="#cdd5dc" stroke-width="1"/>'); }
+    [2, 4, 6, 8, 10].forEach(function (k) { out.push('<text x="' + (cx + 4) + '" y="' + (cy - R * k / 10 + 3.5).toFixed(1) + '" font-size="9" fill="#9aa6b0">' + k + '</text>'); });
+    if (scores) {
+      var pts = scores.map(function (v, i) { return pt(i, R * Math.max(0, Math.min(10, v)) / 10); });
+      out.push('<polygon points="' + pts.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' ') + '" fill="rgba(215,184,131,0.45)" stroke="#b8924f" stroke-width="2.5" stroke-linejoin="round"/>');
+      pts.forEach(function (p) { out.push('<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="3.8" fill="#1e3c49" stroke="#fff" stroke-width="1.5"/>'); });
+    }
+    labels.forEach(function (lab, i) {
+      var p = pt(i, R + 15), dx = p[0] - cx, dy = p[1] - cy;
+      var words = lab.split(' '), lines;
+      if (lab.length <= 13 && i === 0) lines = [lab];
+      else if (words[1] === '&') lines = [words[0] + ' &', words.slice(2).join(' ')];
+      else lines = [words.slice(0, Math.ceil(words.length / 2)).join(' '), words.slice(Math.ceil(words.length / 2)).join(' ')];
+      if (lines[1] === '') lines.pop();
+      var anchor = dx > 8 ? 'start' : dx < -8 ? 'end' : 'middle';
+      var total = lines.length + (scores ? 1 : 0), lh = 15;
+      var y0 = dy < -8 ? p[1] - (total - 1) * lh : dy > 8 ? p[1] + 10 : p[1] - (total - 1) * lh / 2 + 4;
+      var t = '<text text-anchor="' + anchor + '" font-size="13.5" fill="#3a4651" font-family="-apple-system, Segoe UI, Roboto, Arial, sans-serif">';
+      lines.forEach(function (l, j) { t += '<tspan x="' + p[0].toFixed(1) + '" y="' + (y0 + j * lh).toFixed(1) + '">' + h(l) + '</tspan>'; });
+      if (scores) t += '<tspan x="' + p[0].toFixed(1) + '" y="' + (y0 + lines.length * lh).toFixed(1) + '" font-weight="800" font-size="14.5" fill="#1e3c49">' + (scores[i] || '-') + '</tspan>';
+      out.push(t + '</text>');
+    });
+    out.push('</svg>');
+    return out.join('');
+  }
+
+  function isMine(memberId) { return memberId === D().me.id; }
+  function canEdit(memberId) { return isMine(memberId) || D().canManage; }
+  function onMyBoard() { return D().board.id === D().me.boardId; }
+
+  function call(action, payload) {
+    payload = payload || {};
+    if (S.boardId) payload.boardId = S.boardId;
+    return new Promise(function (resolve, reject) {
+      google.script.run
+        .withSuccessHandler(function (r) { if (r && r.ok) resolve(r.data); else reject(new Error(r ? r.error : 'No response. Check your connection.')); })
+        .withFailureHandler(function (e) { reject(new Error((e && e.message) || 'Something went wrong. Check your connection.')); })
+        .api(TOKEN, action, payload);
+    });
+  }
+
+  function run(action, payload, okMsg) {
+    if (S.busy) return Promise.resolve();
+    S.busy = true;
+    return call(action, payload).then(function (data) {
+      S.busy = false;
+      S.data = data;
+      if (data.board) S.boardId = data.board.id;
+      closeAll();
+      render();
+      if (data.notice) toast(data.notice); else if (okMsg) toast(okMsg);
+    }).catch(function (e) { S.busy = false; toast(e.message); });
+  }
+
+  /* ---------- start ---------- */
+  function start() {
+    if (!TOKEN && window.google && google.script && google.script.url) {
+      google.script.url.getLocation(function (loc) { TOKEN = (loc && loc.parameter && loc.parameter.t) || ''; load(); });
+    } else { load(); }
+  }
+
+  function load() {
+    call('load').then(function (data) { S.data = data; S.boardId = data.board.id; render(); }).catch(function (e) {
+      var msg = e.message === 'NO_LINK'
+        ? 'Welcome to ' + h(APP) + '. Please open the personal link your board admin sent you.'
+        : e.message === 'BAD_LINK'
+          ? 'This link no longer works. Please ask your board admin for your current link.'
+          : h(e.message);
+      $('top').innerHTML = '<span></span><div class="title"><b>' + h(APP) + '</b></div><span></span>';
+      $('main').innerHTML = '<div class="loading"><span class="logo-tile"><img src="' + LOGO_SRC + '" alt="C12"></span><div>' + msg + '</div></div>';
+    });
+  }
+
+  /* ---------- navigation ---------- */
+  function go(view, memberId) { S.view = view; if (memberId !== undefined) S.memberId = memberId; if (view === 'pray') S.prayIndex = 0; closeAll(); render(); window.scrollTo(0, 0); }
+
+  function render() {
+    if (!D()) return;
+    var v = S.view;
+    if (v === 'member' && !member(S.memberId)) v = S.view = 'home';
+    if ((v === 'members' || v === 'board') && !D().canManage) v = S.view = 'home';
+    if (v === 'boards' && !D().isSuper) v = S.view = 'home';
+    renderTop(v);
+    var html = v === 'member' ? viewMember() : v === 'pray' ? viewPray() : v === 'members' ? viewMembers() : v === 'board' ? viewBoard() : v === 'boards' ? viewBoards() : v === 'install' ? viewInstall() : viewHome();
+    $('main').innerHTML = html;
+    $('fab').style.display = (v === 'home' || (v === 'member' && S.memberTab !== 'profile')) && D().members.length ? 'flex' : 'none';
+    renderDrawer();
+    if (v === 'home') bindSearch();
+  }
+
+  function renderTop(v) {
+    var left, title = '<span class="brand"><img class="logo" src="' + LOGO_SRC + '" alt=""><b>' + h(APP) + '</b></span><small>' + h(D().board.name) + '</small>';
+    var pray = '<button class="pill" data-act="pray">' + ICON.up + 'Pray</button>';
+    if (v === 'home') left = '<button class="icon-btn" data-act="menu" aria-label="Menu">' + ICON.menu + '</button>';
+    else left = '<button class="back" data-act="home">' + ICON.back + 'Back</button>';
+    if (v === 'member') title = '';
+    if (v === 'pray') { title = '<b>Pray</b><small>' + h(D().board.name) + '</small>'; pray = '<span style="width:40px"></span>'; }
+    if (v === 'members') title = '<b>Members</b><small>' + h(D().board.name) + '</small>';
+    if (v === 'board') title = '<b>Board settings</b><small>' + h(D().board.name) + '</small>';
+    if (v === 'boards') title = '<b>All boards</b>';
+    if (v === 'install') title = '<b>Home screen</b>';
+    $('top').innerHTML = left + '<div class="title">' + title + '</div>' + pray;
+  }
+
+  function renderDrawer() {
+    var d = D(), items = [];
+    items.push(['home', 'Prayer list']);
+    items.push(['pray', 'Pray through the list']);
+    if (onMyBoard()) { items.push(['mine', 'My requests']); items.push(['my-profile', 'My profile']); }
+    if (d.canManage) { items.push(['members', 'Members and links']); items.push(['board', 'Board settings and alerts']); }
+    if (d.isSuper) items.push(['boards', 'All boards']);
+    items.push(['install', 'Add to home screen']);
+    items.push(['refresh', 'Refresh']);
+    $('drawer').innerHTML = '<div class="me"><b>' + h(d.me.name) + '</b><small>' + h(d.board.name) + (d.isSuper ? ' · app owner' : d.canManage ? ' · board admin' : '') + '</small></div>' +
+      items.map(function (i) { return '<button data-act="' + i[0] + '">' + h(i[1]) + '</button>'; }).join('');
+  }
+
+  /* ---------- views ---------- */
+  function emailBlock() {
+    var ms = D().members.filter(function (m) { return m.email; });
+    if (!ms.length) return '';
+    var all = ms.map(function (m) { return m.email; }).join(',');
+    return '<section class="emails"><h3>Email the group</h3><p class="hint">After you pray, send a quick note to let someone know.</p>' +
+      ms.map(function (m) { return '<a class="mail" href="mailto:' + h(m.email) + '"><span>' + h(m.name) + '</span><span>' + h(m.email) + '</span></a>'; }).join('') +
+      '<a class="btn-wide" href="mailto:' + h(all) + '">Email everyone</a></section>';
+  }
+
+  function viewHome() {
+    var d = D(), q = S.q.trim().toLowerCase();
+    var banner = '';
+    if (onMyBoard() && !reqsFor(d.me.id).some(function (r) { return r.month === d.month; })) {
+      banner = '<div class="banner"><p>Add your prayer request for ' + h(monthName(d.month)) + '.</p><button class="pill" data-act="add-mine">Add</button></div>';
+    }
+    if (onMyBoard() && !profileFor(d.me.id, d.month)) {
+      banner += '<div class="banner"><p>Fill in your Balance Wheel for ' + h(monthName(d.month)) + '.</p><button class="pill" data-act="profile-mine">Add</button></div>';
+    }
+    var list = d.members.filter(function (m) {
+      if (!q) return true;
+      if (m.name.toLowerCase().indexOf(q) >= 0) return true;
+      return reqsFor(m.id).some(function (r) { return r.text.toLowerCase().indexOf(q) >= 0; });
+    });
+    var rows = list.map(function (m) {
+      var open = openFor(m.id), thisMonth = open.filter(function (r) { return r.month === d.month; }).length;
+      var sub = open.length ? h(open[0].text.split('\n')[0]) : 'No request yet for ' + h(monthName(d.month));
+      var badge = thisMonth ? '<span class="badge">' + h(monthName(d.month).slice(0, 3)) + '</span>' : (open.length ? '<span class="badge gray">' + open.length + ' open</span>' : '');
+      return '<li><button class="row" data-act="open" data-id="' + h(m.id) + '"><div class="who"><div class="name">' + h(m.name) + (isMine(m.id) ? '<span class="you">You</span>' : '') + '</div><div class="sub">' + sub + '</div></div>' + badge + '<span class="chev">' + ICON.chev + '</span></button></li>';
+    }).join('');
+    if (!d.members.length) rows = '<li class="empty">No members yet.' + (d.canManage ? ' Open the menu and choose Members and links to add people.' : '') + '</li>';
+    else if (!list.length) rows = '<li class="empty">No one matches "' + h(S.q) + '".</li>';
+    return '<div class="search" style="top:' + ($('top').offsetHeight || 66) + 'px">' + ICON.search + '<input id="q" type="search" placeholder="Search prayers" value="' + h(S.q) + '" autocomplete="off" enterkeyhint="search"></div>' +
+      banner + '<ul class="list" id="list">' + rows + '</ul>' + emailBlock();
+  }
+
+  function bindSearch() {
+    var q = $('q');
+    if (!q) return;
+    q.addEventListener('input', function () {
+      S.q = q.value;
+      var pos = q.selectionStart;
+      $('main').innerHTML = viewHome();
+      var q2 = $('q'); q2.focus(); try { q2.setSelectionRange(pos, pos); } catch (e) {}
+      bindSearch();
+    });
+  }
+
+  function viewMember() {
+    var m = member(S.memberId), list = reqsFor(m.id), edit = canEdit(m.id);
+    var groups = {}, order = [];
+    list.forEach(function (r) { if (!groups[r.month]) { groups[r.month] = []; order.push(r.month); } groups[r.month].push(r); });
+    var body = order.map(function (k) {
+      return '<div class="month"><p class="label">' + h(monthLabel(k)) + (k === D().month ? ' · this month' : '') + '</p></div>' + groups[k].map(function (r) {
+        var done = r.status === 'Answered';
+        var acts = edit ? '<div class="actions">' +
+          (done ? '<button data-act="unanswer" data-id="' + h(r.id) + '">' + ICON.undo + 'Reopen</button>' : '<button data-act="answer" data-id="' + h(r.id) + '">' + ICON.check + 'Answered</button>') +
+          '<button data-act="edit" data-id="' + h(r.id) + '">' + ICON.edit + 'Edit</button>' +
+          '<button data-act="delete" data-id="' + h(r.id) + '">' + ICON.x + 'Delete</button></div>' : '';
+        return '<div class="req' + (done ? ' answered' : '') + '"><div class="body"><div class="meta"><span class="date">Date created ' + h(fmtDate(r.createdAt)) + '</span>' +
+          (done ? '<span class="status done">Answered ' + h(fmtDate(r.answeredAt)) + '</span>' : '<span class="status">Praying</span>') + '</div><div class="text">' + h(r.text) + '</div></div>' + acts + '</div>';
+      }).join('');
+    }).join('');
+    if (!list.length) body = '<p style="padding:20px;color:#6b7785">No prayer requests yet.' + (edit ? ' Tap + to add one.' : '') + '</p>';
+    var tab = S.memberTab === 'profile' ? 'profile' : 'prayer';
+    var seg = '<div class="seg"><button class="' + (tab === 'prayer' ? 'on' : '') + '" data-act="tab-prayer">Prayer requests</button><button class="' + (tab === 'profile' ? 'on' : '') + '" data-act="tab-profile">Profile</button></div>';
+    if (tab === 'profile') body = profileBlock(m);
+    return '<div class="paper"><div class="head"><h1>' + h(m.name) + '</h1>' + (m.email ? '<a href="mailto:' + h(m.email) + '">' + h(m.email) + '</a>' : '') + '</div>' + seg + body + emailBlock() + '<div style="height:110px"></div></div>';
+  }
+
+  function profileBlock(m) {
+    var d = D();
+    return [d.month, d.prevMonth].map(function (k) {
+      var p = profileFor(m.id, k), can = canEditProfile(m.id, k);
+      var head = '<div class="ptop"><div><h3>' + h(monthLabel(k)) + '</h3><small>' + (k === d.month ? 'This month' : 'Last month') + (p && p.updatedAt ? ' · updated ' + h(fmtDate(p.updatedAt)) : '') + '</small></div>' +
+        (p && can ? '<button class="edit-btn" data-act="profile-edit" data-id="' + h(m.id) + '" data-month="' + h(k) + '">Edit</button>' : '') + '</div>';
+      if (!p) {
+        var label = k === d.month ? 'Add this month\'s profile' : 'Add ' + h(monthName(k)) + '\'s profile';
+        return '<div class="prof">' + head + '<div class="prof-empty">No Balance Wheel for ' + h(monthName(k)) + ' yet.' +
+          (can ? '<button class="btn-wide" data-act="profile-edit" data-id="' + h(m.id) + '" data-month="' + h(k) + '">' + label + '</button>' : '') + '</div></div>';
+      }
+      return '<div class="prof">' + head + radar(p.scores, d.profileAreas) + (p.wins ? '<div class="wins"><p class="label">Big wins and notable events</p><p>' + h(p.wins) + '</p></div>' : '') + '</div>';
+    }).join('');
+  }
+
+  function prayList() {
+    return D().members.map(function (m) { return { m: m, open: openFor(m.id) }; }).filter(function (x) { return x.open.length; });
+  }
+
+  function viewPray() {
+    var list = prayList();
+    if (!list.length) return '<div class="empty">There are no open prayer requests yet.</div>' + emailBlock();
+    if (S.prayIndex >= list.length) {
+      return '<div class="pray-card"><h2>Amen.</h2><p class="text">You prayed for everyone on the list. Consider sending a short note below to let them know.</p></div>' +
+        '<div class="pray-nav"><button class="btn-wide ghost" data-act="pray-start">Start over</button><button class="btn-wide" data-act="home">Done</button></div>' + emailBlock();
+    }
+    var x = list[S.prayIndex];
+    return '<div class="pray-card"><p class="small">Pray for</p><h2>' + h(x.m.name) + '</h2>' +
+      x.open.map(function (r) { return '<p class="text">' + h(r.text) + '</p><p class="small">' + h(monthLabel(r.month)) + '</p>'; }).join('') +
+      (x.m.email ? '<a class="btn-wide ghost" style="color:#1d2733;border-color:#dfe4ea" href="mailto:' + h(x.m.email) + '?subject=' + encodeURIComponent('Praying for you') + '">Email ' + h(x.m.name) + '</a>' : '') + '</div>' +
+      '<div class="pray-nav"><button class="btn-wide ghost" data-act="pray-prev"' + (S.prayIndex ? '' : ' disabled style="opacity:.4"') + '>Back</button><button class="btn-wide" data-act="pray-next">Next</button></div>' +
+      '<p class="counter">' + (S.prayIndex + 1) + ' of ' + list.length + '</p>';
+  }
+
+  function viewMembers() {
+    var d = D();
+    var intro = d.linksReady
+      ? 'Each person has a private link. Send it only to that person. Anyone with a link can add and change that person\'s requests.'
+      : 'Personal links appear here after the app owner saves the web app link in the Sheet (C12 Prayer menu, Save the web app link).';
+    var rows = d.members.map(function (m) {
+      var role = m.role === 'super' ? 'App owner' : m.role === 'admin' ? 'Board admin' : '';
+      var btns = '<button class="chip" data-act="member-edit" data-id="' + h(m.id) + '">Edit</button>';
+      if (m.link) btns += '<button class="chip green" data-act="copy" data-id="' + h(m.id) + '">Copy link</button>';
+      if (!(m.role === 'super' && !d.isSuper)) btns += '<button class="chip" data-act="reset" data-id="' + h(m.id) + '">New link</button>';
+      if (d.isSuper && m.role === 'member') btns += '<button class="chip" data-act="make-admin" data-id="' + h(m.id) + '">Make board admin</button>';
+      if (m.id !== d.me.id && m.role !== 'super' && (m.role !== 'admin' || d.isSuper)) btns += '<button class="chip" data-act="remove" data-id="' + h(m.id) + '">Remove</button>';
+      return '<div class="mrow"><div class="top-line"><b>' + h(m.name) + '</b><small style="color:#d7b883">' + role + '</small></div><div class="email">' + h(m.email) + '</div>' +
+        (m.link ? '<input class="linkbox" readonly value="' + h(m.link) + '" id="link-' + h(m.id) + '">' : '') + '<div class="btns">' + btns + '</div></div>';
+    }).join('');
+    return '<div class="section"><h2>' + d.members.length + (d.members.length === 1 ? ' member' : ' members') + '</h2><p>' + h(intro) + '</p><button class="btn-wide" data-act="member-add">Add a member</button></div>' +
+      '<div class="section">' + (rows || '<p>No members yet.</p>') + '</div>';
+  }
+
+  function viewBoard() {
+    var b = D().board, days = '', hours = '', per = '';
+    for (var i = 1; i <= 31; i++) days += '<option value="' + i + '"' + (i === b.alertDay ? ' selected' : '') + '>' + ordinal(i) + (i > 28 ? ' (or the last day)' : '') + '</option>';
+    for (var j = 0; j < 24; j++) hours += '<option value="' + j + '"' + (j === b.alertHour ? ' selected' : '') + '>' + hourLabel(j) + '</option>';
+    for (var k = 1; k <= Math.max(1, Math.min(20, D().members.length || 1)); k++) per += '<option value="' + k + '"' + (k === b.membersPerAlert ? ' selected' : '') + '>' + k + '</option>';
+    var next = (b.nextUp || []).join(', ') || 'No members yet';
+    return '<div class="section"><h2>Monthly alert</h2><p>Once a month, ' + h(b.adminEmail || 'the board admin') + ' gets an email with the next member\'s prayer requests, taking turns through the list.</p>' +
+      '<label class="field"><span>Board name</span><input id="b-name" value="' + h(b.name) + '" maxlength="80"></label>' +
+      '<div class="two"><label class="field"><span>Day of the month</span><select id="b-day">' + days + '</select></label>' +
+      '<label class="field"><span>Time</span><select id="b-hour">' + hours + '</select></label></div>' +
+      '<label class="field"><span>Members in each alert</span><select id="b-per">' + per + '</select></label>' +
+      '<button class="btn-wide" data-act="board-save">Save</button></div>' +
+      '<div class="section"><h2>Next up</h2><p>' + h(next) + '</p>' + (b.lastAlertMonth ? '<p>Last alert sent: ' + h(monthLabel(b.lastAlertMonth)) + '</p>' : '') +
+      '<button class="btn-wide ghost" data-act="test-alert">Send me a test alert now</button><p style="margin-top:10px">A test does not change whose turn is next.</p></div>';
+  }
+
+  function viewBoards() {
+    var d = D();
+    var rows = (d.boards || []).map(function (b) {
+      var here = b.id === d.board.id;
+      return '<div class="mrow"><div class="top-line"><b>' + h(b.name) + '</b><small style="color:#d7b883">' + (here ? 'Open now' : '') + '</small></div>' +
+        '<div class="email">Admin: ' + h(b.adminName || 'none') + ' · ' + b.memberCount + ' members</div>' +
+        '<div class="btns">' + (here ? '' : '<button class="chip green" data-act="switch" data-id="' + h(b.id) + '">Open this board</button>') + '</div></div>';
+    }).join('');
+    return '<div class="section"><h2>Boards</h2><p>Each board has its own members, admin, alert, and email list. Members see only their own board.</p>' + rows + '</div>' +
+      '<div class="section"><button class="btn-wide" data-act="board-add">Add a board</button></div>';
+  }
+
+  function viewInstall() {
+    return '<div class="section"><h2>iPhone</h2><ol class="steps"><li>Open your personal link in Safari.</li><li>Tap the Share button (a square with an arrow pointing up).</li><li>Scroll down and tap Add to Home Screen.</li><li>If you see Open as Web App, leave it on.</li><li>Tap Add.</li></ol></div>' +
+      '<div class="section"><h2>Android</h2><ol class="steps"><li>Open your personal link in Chrome.</li><li>Tap the three dots at the top right.</li><li>Tap Add to Home screen, then Add.</li></ol></div>' +
+      '<div class="section"><h2>Windows computer</h2><ol class="steps"><li>Open your personal link in Microsoft Edge.</li><li>Click the three dots at the top right.</li><li>Choose Apps, then Install this site as an app.</li></ol></div>';
+  }
+
+  /* ---------- sheets (forms) ---------- */
+  function openSheet(html) { $('sheet').innerHTML = '<div class="grab"></div>' + html; $('sheet').classList.add('on'); $('scrim').classList.add('on'); }
+  function closeAll() { $('sheet').oninput = null; $('sheet').classList.remove('on'); $('drawer').classList.remove('on'); $('scrim').classList.remove('on'); }
+
+  function monthOptions(selected) {
+    var now = D().month.split('-'), y = +now[0], m = +now[1], out = '';
+    for (var i = -2; i <= 2; i++) {
+      var d = new Date(y, m - 1 + i, 1), k = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2);
+      out += '<option value="' + k + '"' + (k === selected ? ' selected' : '') + '>' + monthLabel(k) + '</option>';
+    }
+    if (selected && out.indexOf('"' + selected + '"') < 0) out = '<option value="' + h(selected) + '" selected>' + h(monthLabel(selected)) + '</option>' + out;
+    return out;
+  }
+
+  function requestSheet(req, forMemberId) {
+    var d = D(), who;
+    var target = req ? req.memberId : (forMemberId || (onMyBoard() ? d.me.id : (d.members[0] || {}).id));
+    if (!req && d.canManage) {
+      who = '<label class="field"><span>For</span><select id="r-member">' + d.members.map(function (m) { return '<option value="' + h(m.id) + '"' + (m.id === target ? ' selected' : '') + '>' + h(m.name) + (isMine(m.id) ? ' (you)' : '') + '</option>'; }).join('') + '</select></label>';
+    } else {
+      who = '<input type="hidden" id="r-member" value="' + h(target) + '"><p style="color:var(--muted);margin:0">For ' + h((member(target) || {}).name || '') + '</p>';
+    }
+    openSheet('<h2>' + (req ? 'Edit request' : 'New prayer request') + '</h2>' + who +
+      '<label class="field"><span>Month</span><select id="r-month">' + monthOptions(req ? req.month : d.month) + '</select></label>' +
+      '<label class="field"><span>Prayer request</span><textarea id="r-text" maxlength="2000" placeholder="How can the group pray for you? Put each item on its own line.">' + h(req ? req.text : '') + '</textarea></label>' +
+      '<button class="btn-wide" data-act="request-save" data-id="' + h(req ? req.id : '') + '">Save</button><button class="btn-wide ghost" data-act="close">Cancel</button>');
+  }
+
+  function profileSheet(memberId, month) {
+    var d = D(), m = member(memberId), p = profileFor(memberId, month);
+    var scores = p ? p.scores.slice() : d.profileAreas.map(function () { return 5; });
+    var rows = d.profileAreas.map(function (lab, i) {
+      return '<div class="score-row"><div class="lab"><span>' + h(lab) + '</span><b id="sv-' + i + '">' + scores[i] + '</b></div>' +
+        '<input type="range" min="1" max="10" step="1" value="' + scores[i] + '" data-score="' + i + '" aria-label="' + h(lab) + '"></div>';
+    }).join('');
+    openSheet('<h2>Balance Wheel</h2><p style="color:var(--muted);margin:0">' + h(m.name) + ', ' + h(monthLabel(month)) + '. Score each area from 1 (needs attention) to 10 (thriving).</p>' +
+      '<div class="preview" id="pf-preview">' + radar(scores, d.profileAreas, true) + '</div>' + rows +
+      '<label class="field"><span>Big wins and notable events (optional, up to 3 lines)</span><textarea id="pf-wins" rows="3" maxlength="400" style="min-height:96px" placeholder="One short line each">' + h(p ? p.wins : '') + '</textarea></label>' +
+      '<button class="btn-wide" data-act="profile-save" data-id="' + h(memberId) + '" data-month="' + h(month) + '">Save</button><button class="btn-wide ghost" data-act="close">Cancel</button>');
+    var sheet = $('sheet');
+    sheet.oninput = function (ev) {
+      var el = ev.target;
+      if (el.getAttribute && el.getAttribute('data-score') !== null) {
+        $('sv-' + el.getAttribute('data-score')).textContent = el.value;
+        $('pf-preview').innerHTML = radar(currentScores(), d.profileAreas, true);
+      }
+      if (el.id === 'pf-wins') {
+        var lines = el.value.split('\n');
+        if (lines.length > 3) { el.value = lines.slice(0, 3).join('\n'); }
+      }
+    };
+  }
+
+  function currentScores() {
+    return Array.prototype.map.call(document.querySelectorAll('#sheet input[data-score]'), function (x) { return +x.value; });
+  }
+
+  function memberSheet(m) {
+    openSheet('<h2>' + (m ? 'Edit member' : 'Add a member') + '</h2>' +
+      '<label class="field"><span>Name</span><input id="m-name" value="' + h(m ? m.name : '') + '" maxlength="60" autocomplete="off"></label>' +
+      '<label class="field"><span>Email</span><input id="m-email" type="email" inputmode="email" autocapitalize="off" value="' + h(m ? m.email : '') + '" autocomplete="off"></label>' +
+      '<button class="btn-wide" data-act="member-save" data-id="' + h(m ? m.id : '') + '">Save</button><button class="btn-wide ghost" data-act="close">Cancel</button>');
+  }
+
+  function boardSheet() {
+    openSheet('<h2>Add a board</h2><p style="color:var(--muted);margin:0">The admin you name here runs this board: members, requests, and the monthly alert.</p>' +
+      '<label class="field"><span>Board name</span><input id="nb-name" maxlength="80"></label>' +
+      '<label class="field"><span>Admin name</span><input id="nb-admin" maxlength="60"></label>' +
+      '<label class="field"><span>Admin email</span><input id="nb-email" type="email" inputmode="email" autocapitalize="off"></label>' +
+      '<button class="btn-wide" data-act="board-create">Create board</button><button class="btn-wide ghost" data-act="close">Cancel</button>');
+  }
+
+  function confirmSheet(title, text, act, id, label) {
+    openSheet('<h2>' + h(title) + '</h2><p style="color:var(--muted)">' + h(text) + '</p><button class="btn-wide danger" data-act="' + act + '" data-id="' + h(id) + '">' + h(label) + '</button><button class="btn-wide ghost" data-act="close">Cancel</button>');
+  }
+
+  function copyLink(id) {
+    var m = member(id), box = $('link-' + id);
+    if (!m || !m.link) return;
+    var done = function () { toast('Link for ' + m.name + ' copied.'); };
+    var fallback = function () { if (box) { box.focus(); box.select(); box.setSelectionRange(0, 9999); } try { if (document.execCommand('copy')) return done(); } catch (e) {} toast('Press and hold the link, then tap Copy.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(m.link).then(done, fallback); else fallback();
+  }
+
+  /* ---------- one click handler for everything ---------- */
+  document.addEventListener('click', function (ev) {
+    var el = ev.target.closest('[data-act]');
+    if (!el) return;
+    var act = el.getAttribute('data-act'), id = el.getAttribute('data-id');
+    var d = D();
+    switch (act) {
+      case 'menu': $('drawer').classList.add('on'); $('scrim').classList.add('on'); break;
+      case 'close': closeAll(); break;
+      case 'home': go('home'); break;
+      case 'pray': case 'pray-start': go('pray'); break;
+      case 'pray-next': S.prayIndex++; render(); window.scrollTo(0, 0); break;
+      case 'pray-prev': S.prayIndex = Math.max(0, S.prayIndex - 1); render(); window.scrollTo(0, 0); break;
+      case 'mine': S.memberTab = 'prayer'; go('member', d.me.id); break;
+      case 'my-profile': S.memberTab = 'profile'; go('member', d.me.id); break;
+      case 'tab-prayer': S.memberTab = 'prayer'; render(); break;
+      case 'tab-profile': S.memberTab = 'profile'; render(); break;
+      case 'profile-mine': profileSheet(d.me.id, d.month); break;
+      case 'profile-edit': profileSheet(id, el.getAttribute('data-month')); break;
+      case 'profile-save': run('saveProfile', { memberId: id, month: el.getAttribute('data-month'), scores: currentScores(), wins: $('pf-wins').value }, 'Profile saved.'); break;
+      case 'members': case 'board': case 'boards': case 'install': go(act); break;
+      case 'refresh': closeAll(); run('load', {}, 'Up to date.'); break;
+      case 'open': go('member', id); break;
+      case 'add-mine': requestSheet(null, d.me.id); break;
+      case 'edit': requestSheet(d.requests.filter(function (r) { return r.id === id; })[0]); break;
+      case 'request-save': run('saveRequest', { id: id || null, memberId: $('r-member').value, month: $('r-month').value, text: $('r-text').value }, 'Saved.'); break;
+      case 'answer': run('setAnswered', { id: id, answered: true }, 'Marked answered. Praise God!'); break;
+      case 'unanswer': run('setAnswered', { id: id, answered: false }, 'Moved back to praying.'); break;
+      case 'delete': confirmSheet('Delete this request?', 'This cannot be undone.', 'delete-yes', id, 'Delete'); break;
+      case 'delete-yes': run('deleteRequest', { id: id }, 'Deleted.'); break;
+      case 'member-add': memberSheet(null); break;
+      case 'member-edit': memberSheet(member(id)); break;
+      case 'member-save': run('saveMember', { id: id || null, name: $('m-name').value, email: $('m-email').value }, 'Saved.'); break;
+      case 'copy': copyLink(id); break;
+      case 'reset': confirmSheet('Make a new link?', 'The old link for ' + member(id).name + ' will stop working. Send them the new one.', 'reset-yes', id, 'Make a new link'); break;
+      case 'reset-yes': run('resetLink', { id: id }, 'New link ready. Copy it and send it.'); break;
+      case 'remove': confirmSheet('Remove ' + member(id).name + '?', 'Their link stops working and they leave the list. Their past requests stay in the Sheet.', 'remove-yes', id, 'Remove'); break;
+      case 'remove-yes': run('removeMember', { id: id }, 'Removed.'); break;
+      case 'make-admin': run('assignAdmin', { id: id }, member(id).name + ' is now the board admin.'); break;
+      case 'board-save': run('saveBoard', { name: $('b-name').value, alertDay: +$('b-day').value, alertHour: +$('b-hour').value, membersPerAlert: +$('b-per').value }, 'Saved.'); break;
+      case 'test-alert': run('sendTestAlert', {}); break;
+      case 'board-add': boardSheet(); break;
+      case 'board-create':
+        var prevBoard = S.boardId;
+        S.boardId = null;
+        run('createBoard', { name: $('nb-name').value, adminName: $('nb-admin').value, adminEmail: $('nb-email').value }).then(function () {
+          if (!S.boardId) { S.boardId = prevBoard; return; }
+          if (S.boardId !== prevBoard) go('members');
+        });
+        break;
+      case 'switch': S.boardId = id; S.view = 'home'; run('load', {}, 'Opened ' + ((d.boards || []).filter(function (b) { return b.id === id; })[0] || {}).name + '.'); break;
+    }
+  });
+  $('scrim').addEventListener('click', closeAll);
+  $('fab').addEventListener('click', function () { requestSheet(null, S.view === 'member' && canEdit(S.memberId) ? S.memberId : null); });
+
+  start();
+})();
+</script>
+</body>
+</html>
