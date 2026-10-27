@@ -17,7 +17,7 @@
 <script>
   (function () {
     var KEY = 'c12-prayer-demo-unlock';
-    try { if (localStorage.getItem(KEY) === '746ccf16c9c99dc39916db45bfff9a5a9ad195a63fc4c1916680f952455d4cd3') document.documentElement.className += ' unlocked'; } catch (e) {}
+    try { if (localStorage.getItem(KEY) === '59e5aa65a9aab3ca04d1a6c30ea9bd231dd1625a11cf49131af25b18485a3c0e') document.documentElement.className += ' unlocked'; } catch (e) {}
   })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -818,13 +818,15 @@ function esc_(s) {
 <script>
 
 (function () {
-  var KEY = 'c12-prayer-demo-v2';
-  var PERSONA_KEY = 'c12-prayer-demo-persona';
+  var KEY = 'c12-prayer-demo-v3';
+  var PERSONA_KEY = 'c12-prayer-demo-persona-v3';
+  // The first persona is the default when the demo opens. The menu shows "Name (Board)",
+  // grouped by role.
   var PERSONAS = [
-    { name: 'Casey Turner', label: 'Member (Board A)' },
-    { name: 'Jordan Ellis', label: 'Board admin (Board A)' },
-    { name: 'Morgan Hale', label: 'App owner (all boards)' },
-    { name: 'Rowan Price', label: 'Member (Board B)' }
+    { name: 'Russell Grigsby', board: 'NW ATX', role: 'Board admin' },
+    { name: 'Casey Turner', board: 'NW ATX', role: 'Member' },
+    { name: 'Rowan Price', board: 'Demo Board B', role: 'Member' },
+    { name: 'Morgan Hale', board: 'All boards', role: 'App owner' }
   ];
   window.DEMO_PERSONAS = PERSONAS;
 
@@ -867,20 +869,20 @@ function esc_(s) {
   function seed() {
     setup();
     var b1 = table_('Boards').rows[0];
-    b1.Name = 'Demo Board A'; b1.AlertDay = 1; b1.AlertHour = 8; b1.MembersPerAlert = 1;
+    b1.Name = 'NW ATX'; b1.AlertDay = 1; b1.AlertHour = 8; b1.MembersPerAlert = 1;
     update_('Boards', b1);
     var owner = table_('Members').rows[0];
     owner.Name = 'Morgan Hale'; owner.Email = 'morgan.hale@example.com';
     update_('Members', owner);
     setSetting_('AppUrl', 'https://script.google.com/macros/s/DEMO/exec');
     var tok = owner.Token;
-    function email(n) { return n.toLowerCase().replace(/[^a-z ]/g, '').replace(' ', '.') + '@example.com'; }
-    ['Jordan Ellis', 'Casey Turner', 'Riley Bennett', 'Taylor Brooks', 'Avery Collins', 'Quinn Harper', 'Drew Mitchell',
+    function email(n) { if (n === 'Russell Grigsby') return 'russell@example.com'; return n.toLowerCase().replace(/[^a-z ]/g, '').replace(' ', '.') + '@example.com'; }
+    ['Russell Grigsby', 'Casey Turner', 'Riley Bennett', 'Taylor Brooks', 'Avery Collins', 'Quinn Harper', 'Drew Mitchell',
      'Parker Lane', 'Hayden Cole', 'Reese Walker', 'Logan Pierce', 'Cameron Reed'].forEach(function (n) {
       api(tok, 'saveMember', { name: n, email: email(n) });
     });
-    var jordan = table_('Members').rows.filter(function (x) { return x.Name === 'Jordan Ellis'; })[0];
-    api(tok, 'assignAdmin', { id: jordan.MemberId });
+    var boardAdmin = table_('Members').rows.filter(function (x) { return x.Name === 'Russell Grigsby'; })[0];
+    api(tok, 'assignAdmin', { id: boardAdmin.MemberId });
     var r = api(tok, 'createBoard', { name: 'Demo Board B', adminName: 'Jamie Foster', adminEmail: email('Jamie Foster') });
     var b2 = r.data.board.id;
     ['Skyler Grant', 'Rowan Price', 'Emerson Hayes', 'Blake Sutton'].forEach(function (n) {
@@ -930,7 +932,7 @@ function esc_(s) {
         append_('Profiles', row);
       });
     });
-    // Put Board A's rotation partway through the list.
+    // Put NW ATX's rotation partway through the list.
     var b1row = table_('Boards').rows[0];
     b1row.RotationPointer = members.filter(function (x) { return x.Name === 'Taylor Brooks'; })[0].MemberId;
     update_('Boards', b1row);
@@ -1206,7 +1208,7 @@ function esc_(s) {
   </div>
   <script>
     (function () {
-      var KEY = 'c12-prayer-demo-unlock', SALT = '41252f6cc24ea8f1dd0fb36faf0036f3', HASH = '746ccf16c9c99dc39916db45bfff9a5a9ad195a63fc4c1916680f952455d4cd3';
+      var KEY = 'c12-prayer-demo-unlock', SALT = '01c946d20e1df1d6133edee5adbb16f1', HASH = '59e5aa65a9aab3ca04d1a6c30ea9bd231dd1625a11cf49131af25b18485a3c0e';
       function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
       document.getElementById('gate-form').addEventListener('submit', function (ev) {
         ev.preventDefault();
@@ -1232,11 +1234,13 @@ function esc_(s) {
   <script>
     (function () {
       var sel = document.getElementById('demo-persona');
+      var groups = {};
       window.DEMO_PERSONAS.forEach(function (p) {
+        if (!groups[p.role]) { groups[p.role] = document.createElement('optgroup'); groups[p.role].label = p.role; sel.appendChild(groups[p.role]); }
         var o = document.createElement('option');
-        o.value = p.name; o.textContent = p.name + ', ' + p.label;
+        o.value = p.name; o.textContent = p.name + ' (' + p.board + ')';
         if (p.name === window.DEMO_PERSONA) o.selected = true;
-        sel.appendChild(o);
+        groups[p.role].appendChild(o);
       });
       sel.addEventListener('change', function () { window.demoSetPersona(sel.value); });
       document.getElementById('demo-reset').addEventListener('click', function () {
