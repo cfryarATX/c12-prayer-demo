@@ -17,12 +17,13 @@
 <script>
   (function () {
     var KEY = 'c12-prayer-demo-unlock';
-    try { if (localStorage.getItem(KEY) === 'eb5229a828ac8a055235fc8516a7594ab1926df350d3c199e9681837b1126dde') document.documentElement.className += ' unlocked'; } catch (e) {}
+    try { if (localStorage.getItem(KEY) === 'd33cfee0714014a49ef16d7d9001455bd0fff92ef4ca254c61a3ab1b856ab285') document.documentElement.className += ' unlocked'; } catch (e) {}
   })();
 </script><style>
   /* ---------- Pages demo extras: tour, Help, CraigBot (demo only) ---------- */
-  .drawer .drawer-sep { height: 0; margin: 8px 20px; border-top: 1px solid var(--line); }
-  .drawer .cb-block { display: flex; align-items: center; gap: 12px; padding: 10px 20px 14px; margin-top: 8px; border-top: 1px solid var(--line); }
+  #drawer > button { min-height: 47px; }
+  .drawer .drawer-sep { height: 0; margin: 5px 20px; border-top: 1px solid var(--line); }
+  .drawer .cb-block { display: flex; align-items: center; gap: 12px; padding: 10px 20px 14px; margin-top: 5px; border-top: 1px solid var(--line); }
   .drawer .cb-col { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
   .drawer .cb-block .cbbtn { display: block; width: 60px; height: 60px; min-height: 0; padding: 2px; border: 0; border-radius: 50%; background: transparent; line-height: 0; }
   .drawer .cb-block .cbbtn:focus-visible { outline: 2px solid #78dbfc; outline-offset: 2px; }
@@ -89,7 +90,7 @@
 </style>
 <script>
 (function () {
-  var VERSION = '1.1.0';
+  var VERSION = '1.1';
   var TOURED = 'c12-prayer-demo-toured';
   var RM = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -1584,7 +1585,7 @@ function esc_(s) {
   </div>
   <script>
     (function () {
-      var KEY = 'c12-prayer-demo-unlock', SALT = '4bb2b82107669f512e9a22c02f32050a', HASH = 'eb5229a828ac8a055235fc8516a7594ab1926df350d3c199e9681837b1126dde';
+      var KEY = 'c12-prayer-demo-unlock', SALT = '5c43bdc314f73549401cb3121434b564', HASH = 'd33cfee0714014a49ef16d7d9001455bd0fff92ef4ca254c61a3ab1b856ab285';
       function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
       // Log out: forget the unlock on this device and show the passcode screen again.
       // The demo's sample data and the chosen persona are kept.
