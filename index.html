@@ -13,12 +13,21 @@
   #gate button { width: 100%; min-height: 52px; margin-top: 12px; border: 0; border-radius: 12px; background: #d7b883; color: #10262f; font-size: 17px; font-weight: 700; }
   #gate .err { color: #ffb4a8; min-height: 22px; margin-top: 10px; font-size: 15px; }
   html.unlocked #gate { display: none; }
-  .demo-bar #demo-logout { background: #10262f; color: #fff8ec; border-color: #10262f; }
+  .demo-bar { position: relative; }
+  .demo-bar #demo-menu-btn { width: 44px; height: 44px; min-height: 44px; padding: 0; margin: -2px -4px -2px 0; border: 0; border-radius: 12px; background: #10262f; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .demo-bar #demo-menu-btn span { display: block; width: 20px; height: 2px; border-radius: 2px; background: #d7b883; }
+  .demo-bar #demo-menu-btn:focus-visible { outline: 2px solid #10262f; outline-offset: 2px; }
+  #demo-menu { position: absolute; top: 48px; right: 8px; z-index: 900; min-width: 200px; padding: 6px; border-radius: 14px; background: #10262f; border: 1px solid rgba(215,184,131,.45); box-shadow: 0 12px 32px rgba(0,0,0,.45); }
+  #demo-menu[hidden] { display: none; }
+  #demo-menu button { display: block; width: 100%; min-height: 44px; padding: 0 14px; border: 0; border-radius: 10px; background: transparent; color: #fff8ec; font-size: 16px; font-weight: 600; text-align: left; }
+  #demo-menu button:active, #demo-menu button:focus-visible { background: #1e3c49; outline: 0; }
+  #demo-menu hr { border: 0; border-top: 1px solid rgba(215,184,131,.35); margin: 6px 4px; }
+  #demo-menu #demo-logout { color: #d7b883; }
 </style>
 <script>
   (function () {
     var KEY = 'c12-prayer-demo-unlock';
-    try { if (localStorage.getItem(KEY) === 'e48cfcd4add9b767c8675d7a7ffaddcb53364d21dfedb8c66fe2536a40640031') document.documentElement.className += ' unlocked'; } catch (e) {}
+    try { if (localStorage.getItem(KEY) === 'fe9d085a230a7601a6dcb34a54ba7a62231bb043e8657d53be60b780e82be2fd') document.documentElement.className += ' unlocked'; } catch (e) {}
   })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1209,8 +1218,28 @@ function esc_(s) {
   </div>
   <script>
     (function () {
-      var KEY = 'c12-prayer-demo-unlock', SALT = '38a8f1fbfb5ff0720f57d578f0702ff3', HASH = 'e48cfcd4add9b767c8675d7a7ffaddcb53364d21dfedb8c66fe2536a40640031';
+      var KEY = 'c12-prayer-demo-unlock', SALT = 'bb3d525e1363d78118b0ab644bfad324', HASH = 'fe9d085a230a7601a6dcb34a54ba7a62231bb043e8657d53be60b780e82be2fd';
       function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+      // Demo menu (hamburger at the top right of the demo bar).
+      function menu() { return document.getElementById('demo-menu'); }
+      function menuBtn() { return document.getElementById('demo-menu-btn'); }
+      function closeMenu(focusBtn) {
+        var m = menu(); if (!m || m.hidden) return;
+        m.hidden = true; menuBtn().setAttribute('aria-expanded', 'false');
+        if (focusBtn) menuBtn().focus();
+      }
+      function openMenu() {
+        var m = menu(); m.hidden = false; menuBtn().setAttribute('aria-expanded', 'true');
+        var first = m.querySelector('button'); if (first) first.focus();
+      }
+      document.addEventListener('click', function (ev) {
+        var t = ev.target;
+        if (!t.closest) return;
+        if (t.closest('#demo-menu-btn')) { if (menu().hidden) openMenu(); else closeMenu(false); return; }
+        if (t.closest('#demo-menu button')) { closeMenu(false); return; }
+        if (!t.closest('#demo-menu')) closeMenu(false);
+      });
+      document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') closeMenu(true); });
       // Log out: forget the unlock on this device and show the passcode screen again.
       // The demo's sample data and the chosen persona are kept.
       // The demo bar comes after this script, so listen on the document.
@@ -1243,8 +1272,12 @@ function esc_(s) {
   <div class="demo-bar" id="demo-bar">
     <b>Demo with sample data</b>
     <label>Viewing as <select id="demo-persona" aria-label="Demo: viewing as"></select></label>
-    <button type="button" id="demo-reset">Reset demo</button>
-    <button type="button" id="demo-logout">Log out</button>
+    <button type="button" id="demo-menu-btn" aria-label="Menu" aria-haspopup="true" aria-controls="demo-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div id="demo-menu" role="menu" aria-label="Demo menu" hidden>
+      <button type="button" role="menuitem" id="demo-reset">Reset demo</button>
+      <hr>
+      <button type="button" role="menuitem" id="demo-logout">Log out</button>
+    </div>
   </div>
   <script>
     (function () {
